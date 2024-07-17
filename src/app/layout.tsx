@@ -1,12 +1,27 @@
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
-
+import { Inter, Racing_Sans_One } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
+
+import Link from "next/link";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "~/components/ui/menubar";
+
+import { Car } from "lucide-react";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const racingSansOne = Racing_Sans_One({
+  subsets: ["latin"], // specify the subsets you want to use
+  weight: ["400"], // specify the weights you want to use
 });
 
 export const metadata = {
@@ -22,8 +37,82 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body className={`font-sans ${inter.variable} antialiased`}>
+        <div className="flex h-screen flex-col justify-between">
+          <div className="bg-neutral-800 pt-0.5 text-xs text-white sm:py-1 lg:text-sm">
+            <div className="hidden items-center justify-evenly md:flex">
+              <div>OPEN TODAY! SALES: 8:30AM-5PM</div>
+              <div>
+                SALES:{"  "}
+                <a className="font-bold underline" href="tel:203-437-8805">
+                  203-437-8805
+                </a>
+              </div>
+              <div>
+                480 WATERTOWN AVE, WATERBURY, CT 06708{"  "}
+                <span className="font-bold underline">Get Directions</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-evenly  md:hidden">
+              Welcome to Blasius Pre-Owned Auto Sales
+            </div>
+          </div>
+          <header className="flex items-center justify-between bg-background px-4 py-3 shadow-sm md:px-6 md:py-4">
+            <Link href="/" className="flex items-center gap-2" prefetch={false}>
+              {/* <Car className="h-4 w-4 md:h-6 md:w-6 lg:h-6 lg:w-6" /> */}
+              <Car className="h-10 w-10" />
+              <span
+                className={`${racingSansOne.className} text-4xl font-semibold`}
+              >
+                United Auto
+              </span>
+            </Link>
+            <Menubar>
+              <MenubarMenu>
+                {/* TODO: On link hover make hover button show up */}
+                <Link href="/inventory" legacyBehavior passHref>
+                  <MenubarTrigger>Inventory</MenubarTrigger>
+                </Link>
+                <MenubarContent className="hidden"></MenubarContent>
+              </MenubarMenu>
+              <MenubarMenu>
+                <MenubarTrigger>Blasius Advantage</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem>Lifetime Services Packages</MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+              <MenubarMenu>
+                <MenubarTrigger>About</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem>About Us</MenubarItem>
+                  <MenubarItem>Contact Us</MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar>
+          </header>
+
+          <div className="flex-1">
+            <TRPCReactProvider>{children}</TRPCReactProvider>
+          </div>
+
+          <footer className="flex items-center justify-evenly gap-2 pb-5 text-xs md:text-base">
+            <Link href="/">
+              {/* <Facebook */}
+              {/*   size={48} */}
+              {/*   strokeWidth={1.5} */}
+              {/*   className="rounded border border-blue-500 bg-blue-500 fill-white text-blue-500" */}
+              {/* /> */}
+              Hello
+            </Link>
+            <div>
+              <Link href="/sitemap">Sitemap</Link>
+              {" | "}
+              <Link href="/bla">Privacy Policy</Link>
+              {" | "}
+              <Link href="/sitemap">Terms and Conditions</Link>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
