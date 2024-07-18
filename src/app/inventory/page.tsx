@@ -1,4 +1,3 @@
-// @ts-nocheck
 import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
@@ -20,6 +19,7 @@ const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
 
   (Object.keys(updatedItem) as (keyof InventoryItemProps)[]).forEach((key) => {
     if (typeof updatedItem[key] === "string") {
+      //@ts-expect-error because
       updatedItem[key] = (updatedItem[key] as string).replace(/-/g, "");
     }
   });
@@ -30,6 +30,7 @@ const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
 const getInventoryData = () => {
   const filePath = path.join(process.cwd(), "public", "inventorycars.csv");
   const fileContent = fs.readFileSync(filePath, "utf8");
+  //@ts-expect-error because
   const records: InventoryItemProps[] = parse(fileContent, {
     columns: true,
     skip_empty_lines: true,
