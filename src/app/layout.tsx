@@ -56,7 +56,7 @@ export default function RootLayout({
               <div>
                 SALES:{"  "}
                 <a className="font-bold underline" href="tel:203-437-8805">
-                  203-437-8805
+                  203-756-8851
                 </a>
               </div>
               <div>
