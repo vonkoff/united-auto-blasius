@@ -2,7 +2,16 @@ import "~/styles/globals.css";
 
 import { Inter, Racing_Sans_One } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
-
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "~/components/ui/sheet";
 import Link from "next/link";
 import {
   Menubar,
@@ -12,7 +21,7 @@ import {
   MenubarTrigger,
 } from "~/components/ui/menubar";
 
-import { Car } from "lucide-react";
+import Image from "next/image";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,8 +48,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable} antialiased`}>
         <div className="flex h-screen flex-col justify-between">
-          <div className="bg-neutral-800 pt-0.5 text-xs text-white sm:py-1 lg:text-sm">
-            <div className="hidden items-center justify-evenly md:flex">
+          <div className="hidden justify-center bg-neutral-800 pt-0.5 text-xs text-white sm:py-1 md:block lg:text-sm">
+            <div className="flex items-center justify-evenly ">
               <div>OPEN TODAY! SALES: 8:30AM-5PM</div>
               <div>
                 SALES:{"  "}
@@ -53,36 +62,72 @@ export default function RootLayout({
                 <span className="font-bold underline">Get Directions</span>
               </div>
             </div>
-            <div className="flex items-center justify-evenly  md:hidden">
-              Welcome to Blasius Pre-Owned Auto Sales
-            </div>
+            {/* <div className="flex items-center justify-evenly  md:hidden"> */}
+            {/*   Welcome to United Auto */}
+            {/* </div> */}
           </div>
           <header className="flex items-center justify-between bg-background px-4 py-3 shadow-sm md:px-6 md:py-4">
             <Link href="/" className="flex items-center gap-2" prefetch={false}>
-              {/* <Car className="h-4 w-4 md:h-6 md:w-6 lg:h-6 lg:w-6" /> */}
-              <Car className="h-10 w-10" />
-              <span
-                className={`${racingSansOne.className} text-4xl font-semibold`}
-              >
-                United Auto
-              </span>
+              <Image
+                src="/images/united-auto-logo.jpg"
+                width={115}
+                height={115}
+                alt="United Auto Logo"
+              />
+              {/* <span */}
+              {/*   className={`${racingSansOne.className} text-lg font-semibold sm:text-3xl lg:text-4xl`} */}
+              {/* > */}
+              {/*   United Auto */}
+              {/* </span> */}
             </Link>
-            <Menubar>
+            <Sheet>
+              <SheetTrigger asChild>
+                <span className="flex transform cursor-pointer border-y-2 border-black font-black font-bold transition duration-500 ease-in-out hover:-translate-y-0.5  md:hidden">
+                  Menu
+                </span>
+              </SheetTrigger>
+              {/* TODO: Adjust size of sheet using tailwind css mainly mobile */}
+              <SheetContent>
+                <SheetHeader>
+                  <SheetTitle></SheetTitle>
+                  <SheetDescription></SheetDescription>
+                </SheetHeader>
+                <div className="grid gap-4 py-4 font-semibold underline underline-offset-2">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    Inventory
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4 text-nowrap">
+                    Blasius Advantage
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    About
+                  </div>
+                </div>
+                <SheetFooter>
+                  <SheetClose asChild></SheetClose>
+                </SheetFooter>
+              </SheetContent>{" "}
+            </Sheet>
+            <Menubar className="hidden md:flex">
               <MenubarMenu>
                 {/* TODO: On link hover make hover button show up */}
                 <Link href="/inventory" legacyBehavior passHref>
-                  <MenubarTrigger>Inventory</MenubarTrigger>
+                  <MenubarTrigger className="text-base">
+                    Inventory
+                  </MenubarTrigger>
                 </Link>
                 <MenubarContent className="hidden"></MenubarContent>
               </MenubarMenu>
               <MenubarMenu>
-                <MenubarTrigger>Blasius Advantage</MenubarTrigger>
+                <MenubarTrigger className="text-base">
+                  Blasius Advantage
+                </MenubarTrigger>
                 <MenubarContent>
                   <MenubarItem>Lifetime Services Packages</MenubarItem>
                 </MenubarContent>
               </MenubarMenu>
               <MenubarMenu>
-                <MenubarTrigger>About</MenubarTrigger>
+                <MenubarTrigger className="text-base">About</MenubarTrigger>
                 <MenubarContent>
                   <MenubarItem>About Us</MenubarItem>
                   <MenubarItem>Contact Us</MenubarItem>

@@ -34,7 +34,7 @@ export default async function Home() {
                         lg:px-8 lg:pb-20"
             >
               <h1 className="text-center text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-                <span className="text-white">United Auto Sales & Service</span>
+                <span className="text-white">United Auto</span>
               </h1>
               <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
                 Where friends send friends
