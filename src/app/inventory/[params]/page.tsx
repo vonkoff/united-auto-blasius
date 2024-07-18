@@ -30,15 +30,14 @@ interface InventoryPageProps {
   };
 }
 
-// Function to remove hyphens from strings in InventoryItemProps
 const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
   const updatedItem: InventoryItemProps = { ...item };
 
-  for (const key in updatedItem) {
+  (Object.keys(updatedItem) as (keyof InventoryItemProps)[]).forEach((key) => {
     if (typeof updatedItem[key] === "string") {
-      updatedItem[key] = updatedItem[key].replace(/-/g, "");
+      updatedItem[key] = (updatedItem[key] as string).replace(/-/g, "");
     }
-  }
+  });
 
   return updatedItem;
 };
@@ -51,7 +50,7 @@ const getInventoryData = () => {
     skip_empty_lines: true,
   });
 
-  // Parse the ImageURLs field as JSON and remove hyphens from strings
+  // Parse the ImageURLs field as JSON
   records.forEach((record) => {
     if (typeof record.ImageURLs === "string") {
       record.ImageURLs = JSON.parse(record.ImageURLs);
