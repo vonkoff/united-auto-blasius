@@ -2,13 +2,13 @@
 import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
-import {
-  Carousel,
-  CarouselMainContainer,
-  SliderMainItem,
-  CarouselThumbsContainer,
-  SliderThumbItem,
-} from "~/components/extensions/carousel";
+// import {
+//   Carousel,
+//   CarouselMainContainer,
+//   SliderMainItem,
+//   CarouselThumbsContainer,
+//   SliderThumbItem,
+// } from "~/components/extensions/carousel";
 import {
   Carousel,
   CarouselContent,
@@ -104,42 +104,42 @@ const InventoryItemPage = ({ params }: InventoryPageProps) => {
     return <div>Item not found</div>;
   }
 
-  const CarouselOrientation = () => {
-    return (
-      <Carousel>
-        <CarouselMainContainer className="h-60">
-          {item.ImageURLs.map((url, index) => (
-            <SliderMainItem key={index} className="bg-transparent">
-              <div className="flex h-full w-full items-center justify-center">
-                <img
-                  src={`/images/cars/${url}`}
-                  alt={`Slide ${index + 1}`}
-                  className="max-h-full max-w-full rounded-xl object-contain"
-                />
-              </div>
-            </SliderMainItem>
-          ))}
-        </CarouselMainContainer>
-        <CarouselThumbsContainer>
-          {item.ImageURLs.map((url, index) => (
-            <SliderThumbItem
-              key={index}
-              index={index}
-              className="bg-transparent"
-            >
-              <div className="  ">
-                <img
-                  src={`/images/cars/${url}`}
-                  alt={`Slide ${index + 1}`}
-                  className=" rounded-xl object-contain"
-                />
-              </div>
-            </SliderThumbItem>
-          ))}
-        </CarouselThumbsContainer>
-      </Carousel>
-    );
-  };
+  // const CarouselOrientation = () => {
+  //   return (
+  //     <Carousel>
+  //       <CarouselMainContainer className="h-60">
+  //         {item.ImageURLs.map((url, index) => (
+  //           <SliderMainItem key={index} className="bg-transparent">
+  //             <div className="flex h-full w-full items-center justify-center">
+  //               <img
+  //                 src={`/images/cars/${url}`}
+  //                 alt={`Slide ${index + 1}`}
+  //                 className="max-h-full max-w-full rounded-xl object-contain"
+  //               />
+  //             </div>
+  //           </SliderMainItem>
+  //         ))}
+  //       </CarouselMainContainer>
+  //       <CarouselThumbsContainer>
+  //         {item.ImageURLs.map((url, index) => (
+  //           <SliderThumbItem
+  //             key={index}
+  //             index={index}
+  //             className="bg-transparent"
+  //           >
+  //             <div className="  ">
+  //               <img
+  //                 src={`/images/cars/${url}`}
+  //                 alt={`Slide ${index + 1}`}
+  //                 className=" rounded-xl object-contain"
+  //               />
+  //             </div>
+  //           </SliderThumbItem>
+  //         ))}
+  //       </CarouselThumbsContainer>
+  //     </Carousel>
+  //   );
+  // };
 
   return (
     <div className="container mx-auto p-6">
