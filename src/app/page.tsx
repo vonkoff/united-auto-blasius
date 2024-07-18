@@ -4,6 +4,7 @@ import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import { MapPin, Clock10 } from "lucide-react";
 import { Racing_Sans_One } from "next/font/google";
+import mapPic from "../../public/images/map.png";
 
 const racingSansOne = Racing_Sans_One({
   subsets: ["latin"], // specify the subsets you want to use
@@ -77,9 +78,11 @@ export default async function Home() {
               </div>
             </span>
           </div>
-          <img
-            className="order-first max-h-64  w-full object-cover md:order-last"
-            src="https://api.mapbox.com/styles/v1/di-sysops/cle6iyspk000301jvzavqrvjp/static/pin-l+1499CE(-73.4056293,41.4596462)/-73.4056293,41.4596462,10,0,0/343x450@2x?access_token=pk.eyJ1IjoiZGktc3lzb3BzIiwiYSI6ImNqMnJzNnRvYTAwOXkzMHBsamE1cTd0OGcifQ.qlCfteKKSMrHmHxG0jahxA"
+          <Image
+            className="object-fit order-first  max-h-64 w-full md:order-last"
+            alt="map location of United Auto"
+            src={mapPic}
+            // src="/images/map.png"
           />
         </div>
       </div>

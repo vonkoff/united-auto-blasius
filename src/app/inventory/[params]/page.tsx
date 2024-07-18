@@ -2,14 +2,22 @@
 import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
+// import {
+//   Carousel,
+//   CarouselMainContainer,
+//   SliderMainItem,
+//   CarouselThumbsContainer,
+//   SliderThumbItem,
+// } from "~/components/extensions/carousel";
 import {
   Carousel,
-  CarouselMainContainer,
-  SliderMainItem,
-  CarouselThumbsContainer,
-  SliderThumbItem,
-} from "~/components/extensions/carousel";
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
+import Image from "next/image";
 import Carouselother from "~/components/extensions/carouselother";
 
 interface InventoryItemProps {
@@ -135,9 +143,27 @@ const InventoryItemPage = ({ params }: InventoryPageProps) => {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="mb-6 flex">
-        <Carouselother images={item.ImageURLs} />
-        {/* <CarouselOrientation /> */}
+      <div className="mb-6 flex max-w-full items-center justify-center">
+        <Carousel className="w-full max-w-4xl">
+          <CarouselContent className="flex">
+            {item.ImageURLs.map((url, index) => (
+              <CarouselItem
+                key={index}
+                className="flex h-96 w-full flex-shrink-0 items-center justify-center"
+              >
+                <Image
+                  src={`/images/cars/${url}`}
+                  alt={`Slide ${index + 1}`}
+                  layout="fill"
+                  objectFit="contain"
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-2 top-1/2 -translate-y-1/2 transform" />
+          <CarouselNext className="right-2 top-1/2 -translate-y-1/2 transform" />
+        </Carousel>
       </div>
       <Card className="rounded-lg bg-white shadow-md">
         <CardHeader className="border-b">
