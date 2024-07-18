@@ -29,6 +29,8 @@ const config = {
     "@typescript-eslint/ban-ts-comment": "off",
     // TODO: Remove later
     "@typescript-eslint/no-unsafe-assignment": "off",
+    // TODO: Remove later
+    "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {
