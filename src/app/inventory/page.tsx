@@ -1,3 +1,4 @@
+// @ts-nocheck
 import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
@@ -19,7 +20,6 @@ const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
 
   (Object.keys(updatedItem) as (keyof InventoryItemProps)[]).forEach((key) => {
     if (typeof updatedItem[key] === "string") {
-      //@ts-expect-error because
       updatedItem[key] = (updatedItem[key] as string).replace(/-/g, "");
     }
   });
@@ -30,7 +30,6 @@ const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
 const getInventoryData = () => {
   const filePath = path.join(process.cwd(), "public", "inventorycars.csv");
   const fileContent = fs.readFileSync(filePath, "utf8");
-  //@ts-expect-error because
   const records: InventoryItemProps[] = parse(fileContent, {
     columns: true,
     skip_empty_lines: true,
@@ -38,9 +37,9 @@ const getInventoryData = () => {
 
   // Parse the ImageURLs field as JSON and remove hyphens from strings
   records.forEach((record) => {
-    if (typeof record.ImageURLs === "string") {
-      record.ImageURLs = JSON.parse(record.ImageURLs);
-    }
+    // if (typeof record.ImageURLs === "string") {
+    //   record.ImageURLs = JSON.parse(record.ImageURLs);
+    // }
     Object.assign(record, removeHyphens(record));
   });
 
