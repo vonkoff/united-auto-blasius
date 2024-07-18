@@ -5,8 +5,6 @@ import { parse } from "csv-parse/sync";
 import {
   Carousel,
   CarouselMainContainer,
-  CarouselNext,
-  CarouselPrevious,
   SliderMainItem,
   CarouselThumbsContainer,
   SliderThumbItem,
@@ -66,21 +64,33 @@ export async function generateStaticParams() {
   const items = getInventoryData();
 
   return items.map((item) => ({
-    params: encodeURIComponent(`${item.Make}-${item.Model}-${item.Stock}`),
+    params: encodeURIComponent(
+      `${item.Make}-${item.Model.replace(/\s+/g, "-")}-${item.Stock}`,
+    ),
   }));
 }
 
 const InventoryItemPage = ({ params }: InventoryPageProps) => {
   const decodedParams = decodeURIComponent(params.params);
-  const [make, model, stock] = decodedParams.split("-");
+  const paramsArray = decodedParams.split("-");
+  const make = paramsArray[0];
+  const stock = paramsArray[paramsArray.length - 1];
+  const model = paramsArray.slice(1, -1).join(" ");
+
+  console.log(`Decoded Params: ${decodedParams}`);
+  console.log(`Make: ${make}, Model: ${model}, Stock: ${stock}`);
 
   const items = getInventoryData();
+  console.log(`Items: ${JSON.stringify(items, null, 2)}`);
+
   const item = items.find(
     (i) =>
       i.Make.toLowerCase() === make.toLowerCase() &&
       i.Model.toLowerCase() === model.toLowerCase() &&
       i.Stock === stock,
   );
+
+  console.log(`Found Item: ${JSON.stringify(item, null, 2)}`);
 
   if (!item) {
     return <div>Item not found</div>;
@@ -89,8 +99,6 @@ const InventoryItemPage = ({ params }: InventoryPageProps) => {
   const CarouselOrientation = () => {
     return (
       <Carousel>
-        {/* <CarouselNext className="top-1/3 -translate-y-1/3" /> */}
-        {/* <CarouselPrevious className="top-1/3 -translate-y-1/3" /> */}
         <CarouselMainContainer className="h-60">
           {item.ImageURLs.map((url, index) => (
             <SliderMainItem key={index} className="bg-transparent">

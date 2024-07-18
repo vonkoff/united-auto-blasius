@@ -70,7 +70,9 @@ export default function Home() {
                 altText={`${item.Year} ${item.Make} ${item.Model}`}
                 carTitle={`${item.Year} ${item.Make} ${item.Model}`}
                 carPrice={item.Price}
-                link={`/inventory/${encodeURIComponent(`${item.Make}-${item.Model}-${item.Stock}`)}`}
+                link={`/inventory/${encodeURIComponent(
+                  `${item.Make}-${item.Model.replace(/\s+/g, "-")}-${item.Stock}`,
+                )}`}
               />
             ))}
           </div>
