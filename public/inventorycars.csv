@@ -1,0 +1,12 @@
+Stock,Year,Make,Model,Color,Mileage,Price,ImageURLs
+49418A,2014,Ford,Focus,Red,121,,"[""Focus.jpg"", ""Focus1.jpg""]"
+48811A,,Honda,Fit,,,"$9,250.00","[""fit.jpg"", ""FIT1.jpg""]
+"
+49152A,2016,Nissan,Altima,Grey,107,"$9,500.00","[""Altima .jpg"", ""Altima 1.jpg"", ""16 Altima.png""]
+"
+8461E,2012,Nissan,Juke,Blue,125,,"[""Juke.jpg"", ""Juke1.jpg""]"
+48528D,2013,VW,Jetta,Red,99,"$7,900.00","[""`11 Jetta.jpg"", ""VW Jetta 11.png""]
+"
+39268A,2012,Honda,Insight,White,73,,"[""Insight.jpg"", ""Insight1.jpg""]"
+49897K,2011,Honda,CR-V,Grey,102,,"[""Honda CR-V.jpg"", ""Honda Cr-V1.jpg""]"
+9459B,2011,VW,Golf GTI,Black,137,"$7,800.00","[""VW Golf 1.jpg"", ""VW Golf.jpg""]"

@@ -1,11 +1,56 @@
-import Link from "next/link";
+import path from "path";
+import fs from "fs";
+import { parse } from "csv-parse/sync";
 import { CarCard } from "../_components/car-card";
 
-export default async function Home() {
-  // const hello = await api.post.hello.query({ text: "from tRPC" });
+interface InventoryItemProps {
+  Stock: string;
+  Year: string;
+  Make: string;
+  Model: string;
+  Color: string;
+  Mileage: string;
+  Price: string;
+  ImageURLs: string[];
+}
+
+// Function to remove hyphens from strings in InventoryItemProps
+const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
+  const updatedItem: InventoryItemProps = { ...item };
+
+  for (const key in updatedItem) {
+    if (typeof updatedItem[key] === "string") {
+      updatedItem[key] = updatedItem[key].replace(/-/g, "");
+    }
+  }
+
+  return updatedItem;
+};
+
+const getInventoryData = () => {
+  const filePath = path.join(process.cwd(), "public", "inventorycars.csv");
+  const fileContent = fs.readFileSync(filePath, "utf8");
+  const records: InventoryItemProps[] = parse(fileContent, {
+    columns: true,
+    skip_empty_lines: true,
+  });
+
+  // Parse the ImageURLs field as JSON and remove hyphens from strings
+  records.forEach((record) => {
+    if (typeof record.ImageURLs === "string") {
+      record.ImageURLs = JSON.parse(record.ImageURLs);
+    }
+    Object.assign(record, removeHyphens(record));
+  });
+
+  return records;
+};
+
+export default function Home() {
+  const items = getInventoryData();
 
   return (
-    <section className="w-full bg-gray-100 py-12 dark:bg-gray-800 md:py-24 lg:py-32">
+    <section className="w-full bg-gray-100 py-12 dark:bg-gray-800">
       <div className="container">
         <div className="flex flex-col items-center space-y-6">
           <div className="space-y-2 text-center">
@@ -17,55 +62,17 @@ export default async function Home() {
               each offering exceptional performance, style, and comfort.
             </p>
           </div>
-          <div className="grid  grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-            <CarCard
-              carJpg="Focus.jpg"
-              altText="Red Ford Focus"
-              carTitle="2014 Ford Focus"
-              carPrice=""
-            />
-            <CarCard
-              carJpg="fit.jpg"
-              altText="Honda Fit"
-              carTitle="Fit car"
-              carPrice="9,250"
-            />
-            <CarCard
-              carJpg="Altima 1.jpg"
-              altText="2016 Grey Nissan Altima"
-              carTitle="2016 Nissan Altima"
-              carPrice="9,500"
-            />
-            <CarCard
-              carJpg="Juke.jpg"
-              altText="2012 Blue Nissan Juke"
-              carTitle="2012 Nissan Juke"
-              carPrice="40,000"
-            />
-            <CarCard
-              carJpg="VW Jetta 11.png"
-              altText="2013 Red VW Jetta"
-              carTitle="2013 VW Jetta"
-              carPrice="7,900"
-            />
-            <CarCard
-              carJpg="Insight.jpg"
-              altText="2012 White Honda Insight"
-              carTitle="2012 Honda Insight"
-              carPrice=""
-            />
-            <CarCard
-              carJpg="Honda CR-V.jpg"
-              altText="2011 Grey Honda CR-V"
-              carTitle="2011 Honda CR-V"
-              carPrice=""
-            />
-            <CarCard
-              carJpg="VW Golf 1.jpg"
-              altText="2011 Black VW Golf GTI"
-              carTitle="VW Golf GTI"
-              carPrice="7,800"
-            />
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {items.map((item) => (
+              <CarCard
+                key={item.Stock}
+                carJpg={item.ImageURLs[0].trim()} // Ensure the image filename is trimmed
+                altText={`${item.Year} ${item.Make} ${item.Model}`}
+                carTitle={`${item.Year} ${item.Make} ${item.Model}`}
+                carPrice={item.Price}
+                link={`/inventory/${encodeURIComponent(`${item.Make}-${item.Model}-${item.Stock}`)}`}
+              />
+            ))}
           </div>
         </div>
       </div>

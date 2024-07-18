@@ -1,10 +1,14 @@
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
-
-import { CreatePost } from "~/app/_components/create-post";
-import { api } from "~/trpc/server";
+import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import { MapPin, Clock10 } from "lucide-react";
+import { Racing_Sans_One } from "next/font/google";
+
+const racingSansOne = Racing_Sans_One({
+  subsets: ["latin"], // specify the subsets you want to use
+  weight: ["400"], // specify the weights you want to use
+});
 
 export default async function Home() {
   noStore();
@@ -14,12 +18,8 @@ export default async function Home() {
     <main className="relative  sm:items-center sm:justify-center">
       <div className="relative">
         <div className="mx-auto">
-          <div className="relative shadow-xl ">
+          <div className="relative pt-48 shadow-xl">
             <div className="absolute inset-0">
-              {/* <img */}
-              {/*   src="https://di-uploads-development.dealerinspire.com/blasiuspreownedauto/uploads/2023/09/BLASIUS-PRE-OWNED.png" */}
-              {/*   alt="" */}
-              {/* /> */}
               <Image
                 className="h-full w-full object-cover"
                 src="/images/front-building-3.jpg"
@@ -28,19 +28,34 @@ export default async function Home() {
                 height={500}
               />
               <div className="absolute inset-0 bg-[color:rgba(30,23,38,0.5)] mix-blend-multiply" />
-            </div>
-            <div
-              className="lg:pt-18 relative px-4 pb-8 pt-8 font-sans shadow-black drop-shadow-[2px_2px_var(--tw-shadow-color)] sm:px-6 sm:pb-14 sm:pt-16
-                        lg:px-8 lg:pb-20"
-            >
-              <h1 className="text-center text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-                <span className="text-white">United Auto</span>
-              </h1>
-              <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
-                Where friends send friends
-              </p>
+              <div className="absolute bottom-0 left-1/2 mb-4 -translate-x-1/2 transform">
+                <Button
+                  asChild
+                  className="rounded bg-blue-600 px-4 py-2 text-xl text-white hover:bg-blue-800"
+                >
+                  <Link href="/inventory">Inventory</Link>
+                </Button>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="relative flex justify-center bg-slate-50 py-10">
+        <div className="w-full max-w-4xl space-y-2 px-8 sm:px-20">
+          <h1
+            className={`${racingSansOne.className} text-2xl sm:text-3xl md:text-4xl`}
+          >
+            Welcome to United Auto!
+          </h1>
+          <p className="max-w-prose text-sm sm:text-base">
+            Welcome to United Auto! Located at 219 Congress Ave, Waterbury, CT
+            06708, United Auto is your first choice for quality pre-owned cars,
+            trucks, and SUVs. Our mission is to provide you with the perfect
+            vehicle at a great price and with the exceptional customer service
+            our name is known for. Simply put, we are committed to ensuring that
+            your auto buying experience is the best it can possibly be.
+          </p>
         </div>
       </div>
 
