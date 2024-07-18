@@ -37,9 +37,9 @@ const getInventoryData = () => {
 
   // Parse the ImageURLs field as JSON and remove hyphens from strings
   records.forEach((record) => {
-    // if (typeof record.ImageURLs === "string") {
-    //   record.ImageURLs = JSON.parse(record.ImageURLs);
-    // }
+    if (typeof record.ImageURLs === "string") {
+      record.ImageURLs = JSON.parse(record.ImageURLs);
+    }
     Object.assign(record, removeHyphens(record));
   });
 
@@ -66,7 +66,7 @@ export default function Home() {
             {items.map((item) => (
               <CarCard
                 key={item.Stock}
-                carJpg={item.ImageURLs[0].trim()} // Ensure the image filename is trimmed
+                carJpg={`${item.ImageURLs[0].trim()}`} // Ensure the image filename is trimmed
                 altText={`${item.Year} ${item.Make} ${item.Model}`}
                 carTitle={`${item.Year} ${item.Make} ${item.Model}`}
                 carPrice={item.Price}
