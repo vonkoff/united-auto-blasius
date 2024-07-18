@@ -14,15 +14,14 @@ interface InventoryItemProps {
   ImageURLs: string[];
 }
 
-// Function to remove hyphens from strings in InventoryItemProps
 const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
   const updatedItem: InventoryItemProps = { ...item };
 
-  for (const key in updatedItem) {
+  (Object.keys(updatedItem) as (keyof InventoryItemProps)[]).forEach((key) => {
     if (typeof updatedItem[key] === "string") {
-      updatedItem[key] = updatedItem[key].replace(/-/g, "");
+      updatedItem[key] = (updatedItem[key] as string).replace(/-/g, "");
     }
-  }
+  });
 
   return updatedItem;
 };
