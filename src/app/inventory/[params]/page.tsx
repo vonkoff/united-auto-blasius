@@ -2,13 +2,13 @@
 import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
-// import {
-//   Carousel,
-//   CarouselMainContainer,
-//   SliderMainItem,
-//   CarouselThumbsContainer,
-//   SliderThumbItem,
-// } from "~/components/extensions/carousel";
+import {
+  Carousel,
+  CarouselMainContainer,
+  SliderMainItem,
+  CarouselThumbsContainer,
+  SliderThumbItem,
+} from "~/components/extensions/carousel";
 import {
   Carousel,
   CarouselContent,
