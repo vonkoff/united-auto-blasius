@@ -11,6 +11,7 @@ import {
   SliderThumbItem,
 } from "~/components/extensions/carousel";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
+import Carouselother from "~/components/extensions/carouselother";
 
 interface InventoryItemProps {
   Stock: string;
@@ -126,8 +127,9 @@ const InventoryItemPage = ({ params }: InventoryPageProps) => {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="mb-6">
-        <CarouselOrientation />
+      <div className="mb-6 flex">
+        <Carouselother images={item.ImageURLs} />
+        {/* <CarouselOrientation /> */}
       </div>
       <Card className="rounded-lg bg-white shadow-md">
         <CardHeader className="border-b">
