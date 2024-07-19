@@ -5,6 +5,7 @@ import Image from "next/image";
 import { MapPin, Clock10 } from "lucide-react";
 import { Racing_Sans_One } from "next/font/google";
 import mapPic from "../../public/images/map.png";
+import frontUnitedAuto from "../../public/images/inside-repair-3.jpg";
 //TODO: match all else images like the one above
 
 const racingSansOne = Racing_Sans_One({
@@ -24,8 +25,8 @@ export default async function Home() {
             <div className="absolute inset-0">
               <Image
                 className="h-full w-full object-cover"
-                src="/images/front-building-3.jpg"
-                alt="Picture of a triangle"
+                src={frontUnitedAuto}
+                alt="Front of United Auto building"
                 width={500}
                 height={500}
               />
