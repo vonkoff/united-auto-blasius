@@ -1,6 +1,8 @@
 import "~/styles/globals.css";
 
 import { Inter, Racing_Sans_One } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
+
 import { TRPCReactProvider } from "~/trpc/react";
 import {
   Sheet,
@@ -48,6 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="G-97NZCPR2KD" />
       <body className={`font-sans ${inter.variable} antialiased`}>
         <div className="flex h-screen flex-col justify-between">
           <div className="hidden justify-center bg-neutral-800 pt-0.5 text-xs text-white sm:py-1 md:block lg:text-sm">

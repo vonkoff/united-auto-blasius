@@ -4,8 +4,6 @@ import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import { MapPin, Clock10 } from "lucide-react";
 import { Racing_Sans_One } from "next/font/google";
-import Head from "next/head";
-import { Partytown } from "@builder.io/partytown/react";
 import mapPic from "../../public/images/map.png";
 //TODO: match all else images like the one above
 
@@ -20,19 +18,6 @@ export default async function Home() {
 
   return (
     <main className="relative  sm:items-center sm:justify-center">
-      <Head>
-        <title>My page title</title>
-        <Partytown debug={true} forward={["dataLayer.push"]} />
-        <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-97NZCPR2KD"></script>
-        <script type="text/partytown">
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-97NZCPR2KD');
-        </script>      
-      </Head>
-
       <div className="relative">
         <div className="mx-auto">
           <div className="relative pt-48 shadow-xl">
