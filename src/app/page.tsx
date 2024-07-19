@@ -5,7 +5,7 @@ import Image from "next/image";
 import { MapPin, Clock10 } from "lucide-react";
 import { Racing_Sans_One } from "next/font/google";
 import mapPic from "../../public/images/map.png";
-import frontUnitedAuto from "../../public/images/inside-repair-3.jpg";
+import frontUnitedAuto from "../../public/images/front-building-3.jpg";
 //TODO: match all else images like the one above
 
 const racingSansOne = Racing_Sans_One({
@@ -90,20 +90,4 @@ export default async function Home() {
       </div>
     </main>
   );
-}
-
-async function CrudShowcase() {
-  // const latestPost = await api.post.getLatest.query();
-  //
-  // return (
-  //   <div className="w-full max-w-xs">
-  //     {latestPost ? (
-  //       <p className="truncate">Your most recent post: {latestPost.name}</p>
-  //     ) : (
-  //       <p>You have no posts yet.</p>
-  //     )}
-  //
-  //     <CreatePost />
-  //   </div>
-  // );
 }

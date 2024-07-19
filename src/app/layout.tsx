@@ -22,7 +22,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "~/components/ui/menubar";
-import { Facebook } from "lucide-react";
+import { Facebook, Phone } from "lucide-react";
 
 import Image from "next/image";
 
@@ -141,6 +141,17 @@ export default function RootLayout({
             <TRPCReactProvider>{children}</TRPCReactProvider>
           </div>
 
+          <Link
+            aria-label="Go to facebook page"
+            href="tel:+2037568851"
+            className="fixed bottom-0 right-0 flex"
+          >
+            <Phone
+              size={60}
+              strokeWidth={1.5}
+              className="mb-6 mr-4 rounded-full border border-green-500 bg-green-500 fill-white text-green-500 sm:hidden"
+            />
+          </Link>
           <footer className="flex items-center justify-evenly gap-2 pb-5 text-xs md:text-base">
             <Link
               aria-label="Go to facebook page"
