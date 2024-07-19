@@ -23,7 +23,7 @@ export default async function Home() {
       <Head>
         <title>My page title</title>
         <Partytown debug={true} forward={["dataLayer.push"]} />
-        <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=YOUR-ID-HERE"></script>
+        <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-97NZCPR2KD"></script>
         <script type="text/partytown">
           window.dataLayer = window.dataLayer || [];
           window.gtag = function gtag(){dataLayer.push(arguments);}

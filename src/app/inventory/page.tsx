@@ -51,6 +51,18 @@ export default function Home() {
 
   return (
     <section className="w-full bg-gray-100 py-12 dark:bg-gray-800">
+      <Head>
+        <title>My page title</title>
+        <Partytown debug={true} forward={["dataLayer.push"]} />
+        <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=YOUR-ID-HERE"></script>
+        <script type="text/partytown">
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-97NZCPR2KD');
+        </script>      
+      </Head>
       <div className="container">
         <div className="flex flex-col items-center space-y-6">
           <div className="space-y-2 text-center">

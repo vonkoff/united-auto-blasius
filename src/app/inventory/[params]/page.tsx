@@ -99,6 +99,18 @@ const InventoryItemPage = ({ params }: InventoryPageProps) => {
 
   return (
     <div className="container mx-auto p-6">
+      <Head>
+        <title>My page title</title>
+        <Partytown debug={true} forward={["dataLayer.push"]} />
+        <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-97NZCPR2KD"></script>
+        <script type="text/partytown">
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-97NZCPR2KD');
+        </script>      
+      </Head>
       <CarCarousel item={item} />
       <Card className="rounded-lg bg-white shadow-md">
         <CardHeader className="border-b">
