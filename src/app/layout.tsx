@@ -143,7 +143,7 @@ export default function RootLayout({
 
           <Link
             aria-label="Go to facebook page"
-            href="tel:+2037568851"
+            href="tel:(203)756-8851"
             className="fixed bottom-0 right-0 flex"
           >
             <Phone
