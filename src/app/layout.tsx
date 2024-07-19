@@ -149,7 +149,7 @@ export default function RootLayout({
             <Phone
               size={60}
               strokeWidth={1.5}
-              className="mb-6 mr-4 rounded-full border border-green-500 bg-green-500 fill-white text-green-500 sm:hidden"
+              className="mb-6 mr-4 rounded-full border-2 border-black bg-green-500 fill-white text-green-500 sm:hidden"
             />
           </Link>
           <footer className="flex items-center justify-evenly gap-2 pb-5 text-xs md:text-base">
