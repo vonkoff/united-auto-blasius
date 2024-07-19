@@ -83,7 +83,7 @@ export default async function Home() {
             className="object-fit order-first  max-h-64 w-full md:order-last"
             alt="map location of United Auto"
             src={mapPic}
-            // src="/images/map.png"
+            priority={true}
           />
         </div>
       </div>

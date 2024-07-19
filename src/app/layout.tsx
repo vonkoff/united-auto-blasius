@@ -83,9 +83,9 @@ export default function RootLayout({
             </Link>
             <Sheet>
               <SheetTrigger asChild>
-                <span className="flex transform cursor-pointer border-y-2 border-black font-black font-bold transition duration-500 ease-in-out hover:-translate-y-0.5  md:hidden">
+                <button className="flex transform cursor-pointer border-y-2 border-black font-black font-bold transition duration-500 ease-in-out hover:-translate-y-0.5  md:hidden">
                   Menu
-                </span>
+                </button>
               </SheetTrigger>
               {/* TODO: Adjust size of sheet using tailwind css mainly mobile */}
               <SheetContent>
@@ -142,7 +142,10 @@ export default function RootLayout({
           </div>
 
           <footer className="flex items-center justify-evenly gap-2 pb-5 text-xs md:text-base">
-            <Link href="https://www.facebook.com/UnitedAutoWaterbury/">
+            <Link
+              aria-label="Go to facebook page"
+              href="https://www.facebook.com/UnitedAutoWaterbury/"
+            >
               <Facebook
                 size={48}
                 strokeWidth={1.5}
