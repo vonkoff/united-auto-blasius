@@ -94,9 +94,13 @@ export default function RootLayout({
                   <SheetDescription></SheetDescription>
                 </SheetHeader>
                 <div className="grid gap-4 py-4 font-semibold underline underline-offset-2">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    Inventory
-                  </div>
+                  <SheetClose asChild>
+                    <Link href="/inventory">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        Inventory
+                      </div>
+                    </Link>
+                  </SheetClose>
                   <div className="grid grid-cols-4 items-center gap-4 text-nowrap">
                     Blasius Advantage
                   </div>
@@ -166,9 +170,9 @@ export default function RootLayout({
             <div>
               <Link href="/sitemap">Sitemap</Link>
               {" | "}
-              <Link href="/bla">Privacy Policy</Link>
+              <Link href="/privacy-policy">Privacy Policy</Link>
               {" | "}
-              <Link href="/sitemap">Terms and Conditions</Link>
+              <Link href="/terms-of-use">Terms of Use</Link>
             </div>
           </footer>
         </div>
