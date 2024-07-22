@@ -4,7 +4,7 @@ export default function TermsOfUse() {
       <div className="container">
         <div className="flex justify-center ">
           <iframe
-            src="https://www.termsfeed.com/live/fa798abe-c96f-4a0d-8c17-2c9042e428aa"
+            src="https://www.termsfeed.com/live/8551c8ac-cbb0-44c1-9d8b-62ed4ecebd71"
             width="100%"
             height="600"
             className="border border-gray-300"
