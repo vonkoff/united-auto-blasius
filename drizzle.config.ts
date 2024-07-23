@@ -1,12 +1,13 @@
-import { type Config } from "drizzle-kit";
+import { config } from "dotenv";
+import { defineConfig } from "drizzle-kit";
 
-import { env } from "~/env";
+config({ path: ".env.development.local" });
 
-export default {
-  schema: "./src/server/db/schema.ts",
-  driver: "mysql2",
+export default defineConfig({
+  schema: "./src/db/schema.ts",
+  out: "./migrations",
+  dialect: "postgresql",
   dbCredentials: {
-    uri: env.DATABASE_URL,
+    url: process.env.POSTGRES_URL!,
   },
-  tablesFilter: ["united-auto_*"],
-} satisfies Config;
+});

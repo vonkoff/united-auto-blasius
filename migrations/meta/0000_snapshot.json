@@ -1,0 +1,1316 @@
+{
+  "id": "605dc1ab-459d-4eb4-9a19-301e9b4255b3",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.braking": {
+      "name": "braking",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_brake_type": {
+          "name": "front_brake_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rear_brake_type": {
+          "name": "rear_brake_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "anti_brake_system": {
+          "name": "anti_brake_system",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "abs_brakes": {
+          "name": "abs_brakes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "electronic_brake_assistance": {
+          "name": "electronic_brake_assistance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "braking_vehicle_id_vehicles_id_fk": {
+          "name": "braking_vehicle_id_vehicles_id_fk",
+          "tableFrom": "braking",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.comfort": {
+      "name": "comfort",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "air_conditioning": {
+          "name": "air_conditioning",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "individual_climate_controls": {
+          "name": "individual_climate_controls",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "comfort_vehicle_id_vehicles_id_fk": {
+          "name": "comfort_vehicle_id_vehicles_id_fk",
+          "tableFrom": "comfort",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.dimensions": {
+      "name": "dimensions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "track_front": {
+          "name": "track_front",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "width": {
+          "name": "width",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height_overall": {
+          "name": "height_overall",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "wheelbase": {
+          "name": "wheelbase",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "length": {
+          "name": "length",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "track_rear": {
+          "name": "track_rear",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cargo_length": {
+          "name": "cargo_length",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "depth": {
+          "name": "depth",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "width_at_wall": {
+          "name": "width_at_wall",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "width_at_wheelwell": {
+          "name": "width_at_wheelwell",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_headroom": {
+          "name": "front_headroom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rear_headroom": {
+          "name": "rear_headroom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_legroom": {
+          "name": "front_legroom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rear_legroom": {
+          "name": "rear_legroom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_shoulder_room": {
+          "name": "front_shoulder_room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rear_shoulder_room": {
+          "name": "rear_shoulder_room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_hip_room": {
+          "name": "front_hip_room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rear_hip_room": {
+          "name": "rear_hip_room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ground_clearance": {
+          "name": "ground_clearance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "turning_diameter": {
+          "name": "turning_diameter",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "dimensions_vehicle_id_vehicles_id_fk": {
+          "name": "dimensions_vehicle_id_vehicles_id_fk",
+          "tableFrom": "dimensions",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.drivetrain": {
+      "name": "drivetrain",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "transmission": {
+          "name": "transmission",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "driveline": {
+          "name": "driveline",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "limited_slip_differential": {
+          "name": "limited_slip_differential",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vehicle_stability_control_system": {
+          "name": "vehicle_stability_control_system",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "traction_control": {
+          "name": "traction_control",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "drivetrain_vehicle_id_vehicles_id_fk": {
+          "name": "drivetrain_vehicle_id_vehicles_id_fk",
+          "tableFrom": "drivetrain",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.entertainment": {
+      "name": "entertainment",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subwoofer": {
+          "name": "subwoofer",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telematics_system": {
+          "name": "telematics_system",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "navigation_aid": {
+          "name": "navigation_aid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "voice_activated_telephone": {
+          "name": "voice_activated_telephone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "entertainment_vehicle_id_vehicles_id_fk": {
+          "name": "entertainment_vehicle_id_vehicles_id_fk",
+          "tableFrom": "entertainment",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.feature": {
+      "name": "feature",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adjustable_foot_pedals": {
+          "name": "adjustable_foot_pedals",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "steering_wheel_mounted_controls": {
+          "name": "steering_wheel_mounted_controls",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "leather_steering_wheel": {
+          "name": "leather_steering_wheel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tilt_steering_column": {
+          "name": "tilt_steering_column",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tilt_steering": {
+          "name": "tilt_steering",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tachometer": {
+          "name": "tachometer",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cruise_control": {
+          "name": "cruise_control",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cargo_area_cover": {
+          "name": "cargo_area_cover",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cargo_area_tiedowns": {
+          "name": "cargo_area_tiedowns",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cargo_net": {
+          "name": "cargo_net",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "load_bearing_exterior_rack": {
+          "name": "load_bearing_exterior_rack",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pickup_truck_bed_liner": {
+          "name": "pickup_truck_bed_liner",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "power_sunroof": {
+          "name": "power_sunroof",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "manual_sunroof": {
+          "name": "manual_sunroof",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tow_hitch_receiver": {
+          "name": "tow_hitch_receiver",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sliding_rear_pickup_truck_window": {
+          "name": "sliding_rear_pickup_truck_window",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "power_windows": {
+          "name": "power_windows",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "power_adjustable_exterior_mirror": {
+          "name": "power_adjustable_exterior_mirror",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "running_boards": {
+          "name": "running_boards",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_air_dam": {
+          "name": "front_air_dam",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "splash_guards": {
+          "name": "splash_guards",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "interval_wipers": {
+          "name": "interval_wipers",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "heated_steering_wheel": {
+          "name": "heated_steering_wheel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "genuine_wood_trim": {
+          "name": "genuine_wood_trim",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rain_sensing_wipers": {
+          "name": "rain_sensing_wipers",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trip_computer": {
+          "name": "trip_computer",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "electrochromic_exterior_rearview_mirror": {
+          "name": "electrochromic_exterior_rearview_mirror",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rear_spoiler": {
+          "name": "rear_spoiler",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "feature_vehicle_id_vehicles_id_fk": {
+          "name": "feature_vehicle_id_vehicles_id_fk",
+          "tableFrom": "feature",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.fuel": {
+      "name": "fuel",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fuel_tank": {
+          "name": "fuel_tank",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mpg_city": {
+          "name": "mpg_city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mpg_highway": {
+          "name": "mpg_highway",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fuel_system": {
+          "name": "fuel_system",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "fuel_vehicle_id_vehicles_id_fk": {
+          "name": "fuel_vehicle_id_vehicles_id_fk",
+          "tableFrom": "fuel",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.lighting": {
+      "name": "lighting",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "automatic_headlights": {
+          "name": "automatic_headlights",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fog_lights": {
+          "name": "fog_lights",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pickup_truck_cargo_box_light": {
+          "name": "pickup_truck_cargo_box_light",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "daytime_running_lights": {
+          "name": "daytime_running_lights",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "high_intensity_discharge_headlights": {
+          "name": "high_intensity_discharge_headlights",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "lighting_vehicle_id_vehicles_id_fk": {
+          "name": "lighting_vehicle_id_vehicles_id_fk",
+          "tableFrom": "lighting",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.pricing": {
+      "name": "pricing",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "msrp": {
+          "name": "msrp",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dealer_invoice": {
+          "name": "dealer_invoice",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "destination_charge": {
+          "name": "destination_charge",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pricing_vehicle_id_vehicles_id_fk": {
+          "name": "pricing_vehicle_id_vehicles_id_fk",
+          "tableFrom": "pricing",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.safety": {
+      "name": "safety",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "driver_airbag": {
+          "name": "driver_airbag",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vehicle_anti_theft": {
+          "name": "vehicle_anti_theft",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keyless_entry": {
+          "name": "keyless_entry",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "remote_ignition": {
+          "name": "remote_ignition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "power_door_locks": {
+          "name": "power_door_locks",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "passenger_airbag": {
+          "name": "passenger_airbag",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "trunk_anti_trap_device": {
+          "name": "trunk_anti_trap_device",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "child_safety_door_locks": {
+          "name": "child_safety_door_locks",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "electronic_parking_aid": {
+          "name": "electronic_parking_aid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "side_head_curtain_airbag": {
+          "name": "side_head_curtain_airbag",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_side_airbag": {
+          "name": "front_side_airbag",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "safety_vehicle_id_vehicles_id_fk": {
+          "name": "safety_vehicle_id_vehicles_id_fk",
+          "tableFrom": "safety",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.seating": {
+      "name": "seating",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_split_bench_seat": {
+          "name": "front_split_bench_seat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "leather_seat": {
+          "name": "leather_seat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "second_row_folding_seat": {
+          "name": "second_row_folding_seat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "front_heated_seat": {
+          "name": "front_heated_seat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "driver_multi_adjustable_power_seat": {
+          "name": "driver_multi_adjustable_power_seat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "standard_seating": {
+          "name": "standard_seating",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "optional_seating": {
+          "name": "optional_seating",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "seating_vehicle_id_vehicles_id_fk": {
+          "name": "seating_vehicle_id_vehicles_id_fk",
+          "tableFrom": "seating",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.suspension": {
+      "name": "suspension",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "steering_type": {
+          "name": "steering_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "front_suspension": {
+          "name": "front_suspension",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rear_suspension": {
+          "name": "rear_suspension",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "front_spring_type": {
+          "name": "front_spring_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rear_spring_type": {
+          "name": "rear_spring_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rack_and_pinon": {
+          "name": "rack_and_pinon",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "suspension_vehicle_id_vehicles_id_fk": {
+          "name": "suspension_vehicle_id_vehicles_id_fk",
+          "tableFrom": "suspension",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.vehicles": {
+      "name": "vehicles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vin": {
+          "name": "vin",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "model_year": {
+          "name": "model_year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "make": {
+          "name": "make",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "series": {
+          "name": "series",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "trim_level": {
+          "name": "trim_level",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "origin": {
+          "name": "origin",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "body_type": {
+          "name": "body_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "engine_type": {
+          "name": "engine_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.warranty": {
+      "name": "warranty",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "basic_distance": {
+          "name": "basic_distance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "basic_duration": {
+          "name": "basic_duration",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "powertrain_distance": {
+          "name": "powertrain_distance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "powertrain_duration": {
+          "name": "powertrain_duration",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "warranty_vehicle_id_vehicles_id_fk": {
+          "name": "warranty_vehicle_id_vehicles_id_fk",
+          "tableFrom": "warranty",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.weight": {
+      "name": "weight",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "curb_weight": {
+          "name": "curb_weight",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "standard_gvwr": {
+          "name": "standard_gvwr",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "maximum_payload": {
+          "name": "maximum_payload",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "curb_weight_rear": {
+          "name": "curb_weight_rear",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "curb_weight_front": {
+          "name": "curb_weight_front",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "standard_towing": {
+          "name": "standard_towing",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gross_combined_wt_rating": {
+          "name": "gross_combined_wt_rating",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "maximum_gvwr": {
+          "name": "maximum_gvwr",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "maximum_towing": {
+          "name": "maximum_towing",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "weight_vehicle_id_vehicles_id_fk": {
+          "name": "weight_vehicle_id_vehicles_id_fk",
+          "tableFrom": "weight",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.wheels_and_tires": {
+      "name": "wheels_and_tires",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vehicle_id": {
+          "name": "vehicle_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tires": {
+          "name": "tires",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tire_pressure_monitor": {
+          "name": "tire_pressure_monitor",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alloy_wheels": {
+          "name": "alloy_wheels",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "wheels_and_tires_vehicle_id_vehicles_id_fk": {
+          "name": "wheels_and_tires_vehicle_id_vehicles_id_fk",
+          "tableFrom": "wheels_and_tires",
+          "tableTo": "vehicles",
+          "columnsFrom": [
+            "vehicle_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

@@ -2,6 +2,8 @@ import "~/styles/globals.css";
 
 import { Inter, Racing_Sans_One } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { placeJsonLd, localBusinessJsonLd } from "~/lib/constants";
+import Head from "next/head";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import {
@@ -52,6 +54,16 @@ export default function RootLayout({
     <html lang="en">
       <GoogleTagManager gtmId="GTM-KWHQB96W" />
       <body className={`font-sans ${inter.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(placeJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessJsonLd),
+          }}
+        />
         <div className="flex h-screen flex-col justify-between">
           <div className="hidden justify-center bg-neutral-800 pt-0.5 text-xs text-white sm:py-1 md:block lg:text-sm">
             <div className="flex items-center justify-evenly ">
@@ -95,18 +107,26 @@ export default function RootLayout({
                 </SheetHeader>
                 <div className="grid gap-4 py-4 font-semibold underline underline-offset-2">
                   <SheetClose asChild>
+                    <Link href="/service">
+                      <div className="grid hidden grid-cols-4 items-center gap-4">
+                        Service
+                      </div>
+                    </Link>
+                  </SheetClose>
+                  <SheetClose asChild>
                     <Link href="/inventory">
                       <div className="grid grid-cols-4 items-center gap-4">
                         Inventory
                       </div>
                     </Link>
                   </SheetClose>
-                  <div className="grid grid-cols-4 items-center gap-4 text-nowrap">
-                    Blasius Advantage
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    About
-                  </div>
+                  <SheetClose asChild>
+                    <Link href="/emissions">
+                      <div className="grid hidden grid-cols-4 items-center gap-4">
+                        Emissions
+                      </div>
+                    </Link>
+                  </SheetClose>
                 </div>
                 <SheetFooter>
                   <SheetClose asChild></SheetClose>
@@ -116,23 +136,31 @@ export default function RootLayout({
             <Menubar className="hidden md:flex">
               <MenubarMenu>
                 {/* TODO: On link hover make hover button show up */}
+                <Link href="/service" legacyBehavior passHref>
+                  <MenubarTrigger className="hidden text-base">
+                    Service
+                  </MenubarTrigger>
+                </Link>
+              </MenubarMenu>
+              <MenubarMenu>
+                {/* TODO: On link hover make hover button show up */}
                 <Link href="/inventory" legacyBehavior passHref>
                   <MenubarTrigger className="text-base">
                     Inventory
                   </MenubarTrigger>
                 </Link>
-                <MenubarContent className="hidden"></MenubarContent>
               </MenubarMenu>
               <MenubarMenu>
-                <MenubarTrigger className="text-base">
-                  Blasius Advantage
+                <Link href="/emissions" legacyBehavior passHref>
+                  <MenubarTrigger className="hidden text-base">
+                    Emissions
+                  </MenubarTrigger>
+                </Link>
+              </MenubarMenu>
+              <MenubarMenu>
+                <MenubarTrigger className="hidden text-base">
+                  About
                 </MenubarTrigger>
-                <MenubarContent>
-                  <MenubarItem>Lifetime Services Packages</MenubarItem>
-                </MenubarContent>
-              </MenubarMenu>
-              <MenubarMenu>
-                <MenubarTrigger className="text-base">About</MenubarTrigger>
                 <MenubarContent>
                   <MenubarItem>About Us</MenubarItem>
                   <MenubarItem>Contact Us</MenubarItem>
@@ -168,6 +196,7 @@ export default function RootLayout({
               />
             </Link>
             <div>
+              {/* //TODO: Update this below to be sitemap page and just put down every link */}
               <Link href="/sitemap">Sitemap</Link>
               {" | "}
               <Link href="/privacy-policy">Privacy Policy</Link>

@@ -36,6 +36,7 @@ const getInventoryData = (): InventoryItemProps[] => {
 const getStaticPages = (): SitemapEntry[] => {
   return [
     //TODO: Right down and fix up last modified date
+    // TODO: Include sitemap page 2
     { url: `${BASE_URL}/`, lastModified: new Date().toISOString() },
     {
       url: `${BASE_URL}/privacy-policy`,

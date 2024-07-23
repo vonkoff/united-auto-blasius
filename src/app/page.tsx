@@ -31,12 +31,24 @@ export default async function Home() {
                 height={500}
               />
               <div className="absolute inset-0 bg-[color:rgba(30,23,38,0.5)] mix-blend-multiply" />
-              <div className="absolute bottom-0 left-1/2 mb-4 -translate-x-1/2 transform">
+              <div className="absolute bottom-0 left-1/2 mb-4 flex -translate-x-1/2 transform gap-4">
                 <Button
                   asChild
-                  className="rounded bg-blue-600 px-4 py-2 text-xl text-white hover:bg-blue-800"
+                  className="hidden rounded border-2 border-blue-300 bg-blue-600 px-2 py-0 text-base text-white hover:bg-blue-800 sm:px-4 sm:py-2 sm:text-xl"
+                >
+                  <Link href="/service">Service</Link>
+                </Button>
+                <Button
+                  asChild
+                  className="rounded border-2 border-blue-300 bg-blue-600 px-2 py-0 text-base text-white hover:bg-blue-800 sm:px-4 sm:py-2 sm:text-xl"
                 >
                   <Link href="/inventory">Inventory</Link>
+                </Button>
+                <Button
+                  asChild
+                  className="hidden rounded border-2 border-blue-300 bg-blue-600 px-2 py-0 text-base text-white hover:bg-blue-800 sm:px-4 sm:py-2 sm:text-xl"
+                >
+                  <Link href="/emissions">Emissions</Link>
                 </Button>
               </div>
             </div>
