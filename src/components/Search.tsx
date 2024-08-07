@@ -4,12 +4,15 @@ import { InstantSearchNext } from "react-instantsearch-nextjs";
 import { SearchBox, SortBy, Pagination, Configure } from "react-instantsearch";
 import CustomHits from "../components/CustomHits"; // Make sure to use the correct path to your CustomHits component
 //TODO: Use this below
-import { Suspense } from "react";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_ID!,
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API!,
 );
+
+console.log(process.env.NEXT_PUBLIC_ALGOLIA_ID!);
+console.log(process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API!);
+console.log(process.env.NEXT_PUBLIC_ALGOLIA_DB);
 
 export function Search() {
   return (
