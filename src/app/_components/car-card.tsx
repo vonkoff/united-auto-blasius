@@ -16,6 +16,9 @@ export function CarCard({
   carPrice,
   link,
 }: CarCardProps) {
+  const formatter = new Intl.NumberFormat("en-US");
+  const formattedPrice = formatter.format(carPrice);
+
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow-lg transition-all hover:shadow-xl dark:bg-gray-950">
       <Link href={link} className="block" prefetch={false}>
@@ -28,7 +31,7 @@ export function CarCard({
         />
         <div className="space-y-2 p-4">
           <h3 className="text-lg font-semibold">{carTitle}</h3>
-          <p className="text-gray-500 dark:text-gray-400">{carPrice}</p>
+          <p className="text-gray-500 dark:text-gray-400">${formattedPrice}</p>
         </div>
       </Link>
     </div>

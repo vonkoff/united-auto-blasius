@@ -3,7 +3,6 @@ import "~/styles/globals.css";
 import { Inter, Racing_Sans_One } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { placeJsonLd, localBusinessJsonLd } from "~/lib/constants";
-import Head from "next/head";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import {

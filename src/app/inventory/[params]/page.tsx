@@ -1,28 +1,16 @@
 // @ts-nocheck
-import path from "path";
-import fs from "fs";
-import { parse } from "csv-parse/sync";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "~/components/ui/carousel";
+import { db } from "~/db/index";
+import { eq } from "drizzle-orm";
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+//   CarouselNext,
+//   CarouselPrevious,
+// } from "~/components/ui/carousel";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
-import Image from "next/image";
+// import Image from "next/image";
 import CarCarousel from "~/app/_components/car-carousel";
-
-interface InventoryItemProps {
-  Stock: string;
-  Year: string;
-  Make: string;
-  Model: string;
-  Color: string;
-  Mileage: string;
-  Price: string;
-  ImageURLs: string[];
-}
 
 interface InventoryPageProps {
   params: {
@@ -30,111 +18,113 @@ interface InventoryPageProps {
   };
 }
 
-const removeHyphens = (item: InventoryItemProps): InventoryItemProps => {
-  const updatedItem: InventoryItemProps = { ...item };
-
-  (Object.keys(updatedItem) as (keyof InventoryItemProps)[]).forEach((key) => {
-    if (typeof updatedItem[key] === "string") {
-      updatedItem[key] = (updatedItem[key] as string).replace(/-/g, "");
-    }
-  });
-
-  return updatedItem;
-};
-
-const getInventoryData = () => {
-  const filePath = path.join(process.cwd(), "public", "inventorycars.csv");
-  const fileContent = fs.readFileSync(filePath, "utf8");
-  const records: InventoryItemProps[] = parse(fileContent, {
-    columns: true,
-    skip_empty_lines: true,
-  });
-
-  // Parse the ImageURLs field as JSON
-  records.forEach((record) => {
-    if (typeof record.ImageURLs === "string") {
-      record.ImageURLs = JSON.parse(record.ImageURLs);
-    }
-    Object.assign(record, removeHyphens(record));
-  });
-
-  return records;
-};
-
 export async function generateStaticParams() {
-  const items = getInventoryData();
+  const result = await db.query.vehicles.findMany();
 
-  return items.map((item) => ({
-    params: encodeURIComponent(
-      `${item.Make}-${item.Model.replace(/\s+/g, "-")}-${item.Stock}`,
-    ),
-  }));
-}
-
-const InventoryItemPage = ({ params }: InventoryPageProps) => {
-  const decodedParams = decodeURIComponent(params.params);
-  const paramsArray = decodedParams.split("-");
-  const make = paramsArray[0];
-  const stock = paramsArray[paramsArray.length - 1];
-  const model = paramsArray.slice(1, -1).join(" ");
-
-  console.log(`Decoded Params: ${decodedParams}`);
-  console.log(`Make: ${make}, Model: ${model}, Stock: ${stock}`);
-
-  const items = getInventoryData();
-  console.log(`Items: ${JSON.stringify(items, null, 2)}`);
-
-  const item = items.find(
-    (i) =>
-      i.Make.toLowerCase() === make.toLowerCase() &&
-      i.Model.toLowerCase() === model.toLowerCase() &&
-      i.Stock === stock,
-  );
-
-  console.log(`Found Item: ${JSON.stringify(item, null, 2)}`);
-
-  if (!item) {
-    return <div>Item not found</div>;
+  if (!Array.isArray(result)) {
+    console.error("Database query did not return an array.");
+    return [];
   }
 
-  return (
-    <div className="container mx-auto p-6">
-      <CarCarousel item={item} />
-      <Card className="rounded-lg bg-white shadow-md">
-        <CardHeader className="border-b">
-          <CardTitle className="text-xl font-semibold">Basic Info</CardTitle>
-        </CardHeader>
-        <CardContent className="p-4">
-          <ul className="space-y-4">
-            <li className="flex justify-between">
-              <span className="font-medium">Exterior:</span>
-              <span>{item.Color}</span>
-            </li>
-            <li className="flex justify-between">
-              <span className="font-medium">Mileage:</span>
-              <span>{item.Mileage}</span>
-            </li>
-            <li className="flex justify-between">
-              <span className="font-medium">Year:</span>
-              <span>{item.Year}</span>
-            </li>
-            <li className="flex justify-between">
-              <span className="font-medium">Make:</span>
-              <span>{item.Make}</span>
-            </li>
-            <li className="flex justify-between">
-              <span className="font-medium">Model:</span>
-              <span>{item.Model}</span>
-            </li>
-            <li className="flex justify-between">
-              <span className="font-medium">Price:</span>
-              <span>{item.Price}</span>
-            </li>
-          </ul>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  const paths = result.map((vehicle) => {
+    const vehicleName = `${vehicle.vehicle.replace(/ /g, "-")}-${vehicle.vin}`;
+    console.log("VEHICLE NAME: ", vehicleName);
+    return {
+      params: encodeURIComponent(vehicleName),
+    };
+  });
+
+  console.log("Generated paths:", paths);
+
+  return paths;
+}
+
+const InventoryItemPage = async ({
+  params,
+}: {
+  params: { params: string };
+}) => {
+  try {
+    const decodedParams = params.params;
+    const paramsArray = decodedParams.split("-");
+    const vin = paramsArray[paramsArray.length - 1];
+    console.log("VIN: ", vin);
+
+    const vehicle = await db.query.vehicles.findFirst({
+      where: (veh, { eq }) => eq(veh.vin, vin),
+      include: {
+        body: true,
+        color: true,
+        class: true,
+        drivetrainType: true,
+        exteriorBaseColor: true,
+        interior: true,
+        interiorMaterial: true,
+        make: true,
+        transmission: true,
+      },
+    });
+    console.log(vehicle);
+
+    if (!vehicle) {
+      return <div>Item not found</div>;
+    }
+    // Parse the imageUrls string into an array
+    let imageUrls: string[] = [];
+    try {
+      imageUrls = JSON.parse(vehicle.imageUrls);
+    } catch (error) {
+      console.error("Error parsing imageUrls:", error);
+    }
+    console.log(imageUrls);
+
+    return (
+      <div className="container mx-auto p-6">
+        <CarCarousel item={imageUrls} />
+        <Card className="rounded-lg bg-white shadow-md">
+          <CardHeader className="border-b">
+            <CardTitle className="text-xl font-semibold">Basic Info</CardTitle>
+          </CardHeader>
+          <CardContent className="p-4">
+            <ul className="space-y-4">
+              <li className="flex justify-between">
+                <span className="font-medium">Exterior:</span>
+                <span>{vehicle.color}</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="font-medium">Mileage:</span>
+                <span>{vehicle.odometer}</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="font-medium">Year:</span>
+                <span>{vehicle.year}</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="font-medium">Make:</span>
+                <span>{vehicle.make}</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="font-medium">Model:</span>
+                <span>{vehicle.model}</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="font-medium">Price:</span>
+                <span>
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(vehicle.price)}
+                </span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  } catch (error) {
+    console.error("Error fetching vehicle data:", error);
+    return <div>Failed to load vehicle data</div>;
+  }
 };
 
 export default InventoryItemPage;

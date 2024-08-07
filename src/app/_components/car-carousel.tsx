@@ -9,17 +9,8 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel";
 
-interface CarouselProps {
-  item: {
-    Stock: string;
-    Year: string;
-    Make: string;
-    Model: string;
-    Color: string;
-    Mileage: string;
-    Price: string;
-    ImageURLs: string[];
-  };
+interface CarCarouselProps {
+  item: string[];
 }
 
 const CarCarousel: React.FC<CarouselProps> = ({ item }) => {
@@ -35,13 +26,14 @@ const CarCarousel: React.FC<CarouselProps> = ({ item }) => {
   const closeZoomedImage = () => {
     setZoomedImage(null);
   };
+  console.log("HERE IMAGES", item);
 
   return (
     <>
       <div className="mb-6 flex max-w-full items-center justify-center">
         <Carousel className="w-full max-w-4xl">
           <CarouselContent className="flex">
-            {item.ImageURLs.map((url, index) => (
+            {item.map((url, index) => (
               <CarouselItem
                 key={index}
                 className="relative flex h-96 w-full flex-shrink-0 items-center justify-center"
