@@ -1,4 +1,5 @@
 //@ts-nocheck
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style */
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
