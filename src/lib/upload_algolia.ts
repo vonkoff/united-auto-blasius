@@ -12,8 +12,11 @@ import { sql } from "drizzle-orm";
 
 dotenv.config();
 
+// eslint-disable-next-line
 const algoliaDB = process.env.NEXT_PUBLIC_ALGOLIA_DB as string;
+// eslint-disable-next-line
 const algoliaID = process.env.NEXT_PUBLIC_ALGOLIA_ID as string;
+// eslint-disable-next-line
 const algoliaAPI = process.env.ALGOLIA_API as string;
 
 const algoClient = algoliasearch(algoliaID, algoliaAPI);
@@ -22,7 +25,6 @@ const index = algoClient.initIndex(algoliaDB);
 type Vehicle = typeof vehicles.$inferSelect;
 type Color = typeof colors.$inferSelect;
 type Interior = typeof interiors.$inferSelect;
-type Equipment = typeof equipments.$inferSelect;
 
 async function fetchVehicles() {
   return await db.select().from(vehicles).execute();
@@ -37,14 +39,14 @@ async function fetchColorById(id: number): Promise<Color | null> {
   return result[0] ?? null;
 }
 
-async function fetchInteriorById(id: number): Promise<Interior | null> {
-  const result = await db
-    .select()
-    .from(interiors)
-    .where(sql`${interiors.id} = ${id}`)
-    .execute();
-  return result[0] ?? null;
-}
+// async function fetchInteriorById(id: number): Promise<Interior | null> {
+//   const result = await db
+//     .select()
+//     .from(interiors)
+//     .where(sql`${interiors.id} = ${id}`)
+//     .execute();
+//   return result[0] ?? null;
+// }
 
 async function fetchEquipmentsByVehicleVin(vin: string): Promise<string[]> {
   const result = await db
