@@ -34,7 +34,7 @@ export default async function Home() {
               <div className="absolute bottom-0 left-1/2 mb-4 flex -translate-x-1/2 transform gap-4">
                 <Button
                   asChild
-                  className="hidden rounded border-2 border-blue-300 bg-blue-600 px-2 py-0 text-base text-white hover:bg-blue-800 sm:px-4 sm:py-2 sm:text-xl"
+                  className="rounded border-2 border-blue-300 bg-blue-600 px-2 py-0 text-base text-white hover:bg-blue-800 sm:px-4 sm:py-2 sm:text-xl"
                 >
                   <Link href="/service">Service</Link>
                 </Button>
@@ -46,7 +46,7 @@ export default async function Home() {
                 </Button>
                 <Button
                   asChild
-                  className="hidden rounded border-2 border-blue-300 bg-blue-600 px-2 py-0 text-base text-white hover:bg-blue-800 sm:px-4 sm:py-2 sm:text-xl"
+                  className="rounded border-2 border-blue-300 bg-blue-600 px-2 py-0 text-base text-white hover:bg-blue-800 sm:px-4 sm:py-2 sm:text-xl"
                 >
                   <Link href="/emissions">Emissions</Link>
                 </Button>

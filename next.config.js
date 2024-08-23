@@ -13,6 +13,9 @@ const config = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ["images.pexels.com", "archives.rep-am.com"],
+  },
 };
 
 export default config;

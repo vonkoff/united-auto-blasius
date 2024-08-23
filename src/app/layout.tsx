@@ -107,7 +107,7 @@ export default function RootLayout({
                 <div className="grid gap-4 py-4 font-semibold underline underline-offset-2">
                   <SheetClose asChild>
                     <Link href="/service">
-                      <div className="grid hidden grid-cols-4 items-center gap-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
                         Service
                       </div>
                     </Link>
@@ -121,7 +121,7 @@ export default function RootLayout({
                   </SheetClose>
                   <SheetClose asChild>
                     <Link href="/emissions">
-                      <div className="grid hidden grid-cols-4 items-center gap-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
                         Emissions
                       </div>
                     </Link>
@@ -150,21 +150,31 @@ export default function RootLayout({
                 </Link>
               </MenubarMenu>
               <MenubarMenu>
+                <Link href="/service" legacyBehavior passHref>
+                  <MenubarTrigger className=" text-base">
+                    Service
+                  </MenubarTrigger>
+                </Link>
+              </MenubarMenu>
+              <MenubarMenu>
                 <Link href="/emissions" legacyBehavior passHref>
-                  <MenubarTrigger className="hidden text-base">
+                  <MenubarTrigger className=" text-base">
                     Emissions
                   </MenubarTrigger>
                 </Link>
               </MenubarMenu>
               <MenubarMenu>
-                <MenubarTrigger className="hidden text-base">
-                  About
-                </MenubarTrigger>
-                <MenubarContent>
-                  <MenubarItem>About Us</MenubarItem>
-                  <MenubarItem>Contact Us</MenubarItem>
-                </MenubarContent>
+                <Link href="/about" legacyBehavior passHref>
+                  <MenubarTrigger className=" text-base">About</MenubarTrigger>
+                </Link>
               </MenubarMenu>
+              {/* <MenubarMenu> */}
+              {/*   <MenubarTrigger className=" text-base">About</MenubarTrigger> */}
+              {/*   <MenubarContent> */}
+              {/*     <MenubarItem>About Us</MenubarItem> */}
+              {/*     <MenubarItem>Contact Us</MenubarItem> */}
+              {/*   </MenubarContent> */}
+              {/* </MenubarMenu> */}
             </Menubar>
           </header>
 

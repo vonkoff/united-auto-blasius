@@ -2,13 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style */
 import { db } from "~/db/index";
 import { eq } from "drizzle-orm";
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-//   CarouselNext,
-//   CarouselPrevious,
-// } from "~/components/ui/carousel";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
 // import Image from "next/image";
 import CarCarousel from "~/app/_components/car-carousel";
