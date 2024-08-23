@@ -126,6 +126,13 @@ export default function RootLayout({
                       </div>
                     </Link>
                   </SheetClose>
+                  <SheetClose asChild>
+                    <Link href="/about">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        About
+                      </div>
+                    </Link>
+                  </SheetClose>
                 </div>
                 <SheetFooter>
                   <SheetClose asChild></SheetClose>
