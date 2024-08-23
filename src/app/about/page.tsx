@@ -35,7 +35,7 @@ const AboutPage = () => {
               name in Waterbury, Connecticut. We understand that trust is
               earned, and we strive every day to earn yours. Our longevity in
               the industry is a testament to our commitment to customer service
-              and our ability to meet all of our clients' needs, from the
+              and our ability to meet all of our clients&apos; needs, from the
               purchase of a car to its maintenance and repair.
             </p>
             <p className="text-sm sm:text-base">
@@ -49,9 +49,9 @@ const AboutPage = () => {
             </p>
             <p className="text-sm sm:text-base">
               Our shop and staff are dedicated to ensuring that your experience
-              with us exceeds your expectations. Whether you're looking to
-              purchase a vehicle or need maintenance and repair services, we're
-              here to meet all your automotive needs under one roof.
+              with us exceeds your expectations. Whether you&apos;re looking to
+              purchase a vehicle or need maintenance and repair services,
+              we&apos;re here to meet all your automotive needs under one roof.
             </p>
             <p className="text-sm font-semibold sm:text-base">
               Give us a call or stop by our Waterbury location. Let us earn your
