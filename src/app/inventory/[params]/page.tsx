@@ -1,5 +1,6 @@
 // @ts-nocheck
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style */
+import { Fragment } from "react";
 import { Montserrat } from "next/font/google";
 import { db } from "~/db/index";
 import { promises as fs } from "fs";
@@ -261,6 +262,33 @@ const InventoryItemPage = async ({
                       </li>
                     ))}
                   </ul>
+                </CardContent>
+              </Card>
+              <h2
+                className={`mb-2 mt-6 text-xl font-semibold ${montserrat.className}`}
+              >
+                Description
+              </h2>
+              <Card className="w-full rounded-none shadow-none">
+                <CardContent className="p-0">
+                  <div
+                    className={`bg-[#F2F2F2] p-4 text-sm ${montserrat.className}`}
+                  >
+                    {vehicle.autoWriterDescription
+                      .split("STOP BY")
+                      .map((part, index) => (
+                        <Fragment key={index}>
+                          {index > 0 && (
+                            <>
+                              <br />
+                              <br />
+                            </>
+                          )}
+                          {index > 0 ? "STOP BY" : ""}
+                          {part}
+                        </Fragment>
+                      ))}
+                  </div>
                 </CardContent>
               </Card>
 

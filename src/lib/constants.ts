@@ -26,63 +26,64 @@ interface VehicleSchemaProps {
   priceValidUntil: string;
 }
 
-// const createVehicleSchema = (
-//   props: VehicleSchemaProps,
-// ): WithContext<Product & Car> => ({
-//   "@context": "https://schema.org/",
-//   "@type": ["Product", "Car"],
-//   "@id": props.vehicleId,
-//   name: props.name,
-//   image: props.image,
-//   description: props.description,
-//   sku: props.vehicleId,
-//   brand: {
-//     "@type": "Brand",
-//     name: props.brand,
-//   },
-//   model: props.model,
-//   vehicleModelDate: props.year,
-//   itemCondition: "http://schema.org/UsedCondition",
-//   vehicleIdentificationNumber: props.vin,
-//   mpn: props.mpn,
-//   color: props.color,
-//   manufacturer: {
-//     "@type": "Organization",
-//     name: props.brand,
-//   },
-//   mileageFromOdometer: {
-//     "@type": "QuantitativeValue",
-//     value: props.mileage.toString(),
-//     unitCode: "SMI",
-//   },
-//   aggregateRating: {
-//     "@type": "AggregateRating",
-//     ratingValue: props.ratingValue,
-//     reviewCount: props.reviewCount,
-//   },
-//   review: {
-//     "@type": "Review",
-//     reviewRating: {
-//       "@type": "Rating",
-//       ratingValue: props.ratingValue,
-//       bestRating: "5",
-//       worstRating: "1",
-//     },
-//     author: {
-//       "@type": "Organization",
-//       name: "Cars.com",
-//     },
-//   },
-//   offers: {
-//     "@type": "Offer",
-//     url: props.url,
-//     priceCurrency: "USD",
-//     price: props.price,
-//     priceValidUntil: props.priceValidUntil,
-//     itemCondition: "http://schema.org/UsedCondition",
-//     availability: "http://schema.org/InStock",
-//   },
-// });
+const createVehicleSchema = (
+  props: VehicleSchemaProps,
+): WithContext<Product & Car> => ({
+  "@context": "https://schema.org",
+  //@ts-ignore this was allowed on one other website
+  "@type": ["Product", "Car"],
+  "@id": props.vehicleId,
+  name: props.name,
+  image: props.image,
+  description: props.description,
+  sku: props.vehicleId,
+  brand: {
+    "@type": "Brand",
+    name: props.brand,
+  },
+  model: props.model,
+  vehicleModelDate: props.year,
+  itemCondition: "https://schema.org/UsedCondition",
+  vehicleIdentificationNumber: props.vin,
+  mpn: props.mpn,
+  color: props.color,
+  manufacturer: {
+    "@type": "Organization",
+    name: props.brand,
+  },
+  mileageFromOdometer: {
+    "@type": "QuantitativeValue",
+    value: props.mileage.toString(),
+    unitCode: "SMI",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: props.ratingValue,
+    reviewCount: props.reviewCount,
+  },
+  review: {
+    "@type": "Review",
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: props.ratingValue,
+      bestRating: "5",
+      worstRating: "1",
+    },
+    author: {
+      "@type": "Organization",
+      name: "Cars.com",
+    },
+  },
+  offers: {
+    "@type": "Offer",
+    url: props.url,
+    priceCurrency: "USD",
+    price: props.price,
+    priceValidUntil: props.priceValidUntil,
+    itemCondition: "https://schema.org/UsedCondition",
+    availability: "https://schema.org/InStock",
+  },
+});
 
 const autoBusinessJsonLd: WithContext<AutoRepair | AutoBodyShop | AutoDealer> =
   {
