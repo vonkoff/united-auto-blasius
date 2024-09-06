@@ -7,83 +7,83 @@ import type {
   Car,
 } from "schema-dts";
 
+const BASE_URL = process.env.BASE_URL;
+
 interface VehicleSchemaProps {
-  vehicleId: string;
-  name: string;
-  image: string;
-  description: string;
-  brand: string;
-  model: string;
-  year: string;
   vin: string;
-  mpn: string;
-  color: string;
-  mileage: number;
-  ratingValue: string;
-  reviewCount: string;
-  url: string;
-  price: string;
-  priceValidUntil: string;
+  mainImage: string;
+  autoWriterDescription: string;
+  vehicle: string;
+  makeId: number;
+  model: string;
+  year: number;
+  stockNumber: string;
+  colorId: number;
+  odometer: string;
+  price: number;
+  newOrUsed: string;
+  starredEquip: string;
 }
 
 const createVehicleSchema = (
   props: VehicleSchemaProps,
-): WithContext<Product & Car> => ({
-  "@context": "https://schema.org",
-  //@ts-ignore this was allowed on one other website
-  "@type": ["Product", "Car"],
-  "@id": props.vehicleId,
-  name: props.name,
-  image: props.image,
-  description: props.description,
-  sku: props.vehicleId,
-  brand: {
-    "@type": "Brand",
-    name: props.brand,
-  },
-  model: props.model,
-  vehicleModelDate: props.year,
-  itemCondition: "https://schema.org/UsedCondition",
-  vehicleIdentificationNumber: props.vin,
-  mpn: props.mpn,
-  color: props.color,
-  manufacturer: {
-    "@type": "Organization",
-    name: props.brand,
-  },
-  mileageFromOdometer: {
-    "@type": "QuantitativeValue",
-    value: props.mileage.toString(),
-    unitCode: "SMI",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: props.ratingValue,
-    reviewCount: props.reviewCount,
-  },
-  review: {
-    "@type": "Review",
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: props.ratingValue,
-      bestRating: "5",
-      worstRating: "1",
+  makeName: string,
+  colorName: string,
+): WithContext<Product & Car> => {
+  const currentDate = new Date();
+  const priceValidUntil = new Date(
+    currentDate.setDate(currentDate.getDate() + 30),
+  )
+    .toISOString()
+    .split("T")[0];
+
+  const vehicleUrl = `${BASE_URL}/inventory/${encodeURIComponent(`${props.vehicle.replace(/ /g, "-")}-${props.vin}`)}`;
+
+  return {
+    "@context": "https://schema.org",
+    //@ts-ignore
+    "@type": ["Product", "Car"],
+    "@id": props.vin,
+    name: props.vehicle,
+    image: vehicleUrl + props.mainImage,
+    description: props.autoWriterDescription,
+    sku: props.stockNumber,
+    brand: {
+      "@type": "Brand",
+      name: makeName,
     },
-    author: {
+    model: props.model,
+    vehicleModelDate: props.year.toString(),
+    itemCondition:
+      props.newOrUsed === "new"
+        ? "https://schema.org/NewCondition"
+        : "https://schema.org/UsedCondition",
+    vehicleIdentificationNumber: props.vin,
+    mpn: props.stockNumber,
+    color: colorName,
+    manufacturer: {
       "@type": "Organization",
-      name: "Cars.com",
+      name: makeName,
     },
-  },
-  offers: {
-    "@type": "Offer",
-    url: props.url,
-    priceCurrency: "USD",
-    price: props.price,
-    priceValidUntil: props.priceValidUntil,
-    itemCondition: "https://schema.org/UsedCondition",
-    availability: "https://schema.org/InStock",
-  },
-});
+    mileageFromOdometer: {
+      "@type": "QuantitativeValue",
+      value: props.odometer,
+      unitCode: "SMI",
+    },
+    offers: {
+      "@type": "Offer",
+      url: vehicleUrl,
+      priceCurrency: "USD",
+      price: props.price.toString(),
+      priceValidUntil: priceValidUntil,
+      itemCondition:
+        props.newOrUsed === "new"
+          ? "https://schema.org/NewCondition"
+          : "https://schema.org/UsedCondition",
+      availability: "https://schema.org/InStock",
+    },
+  };
+};
 
 const autoBusinessJsonLd: WithContext<AutoRepair | AutoBodyShop | AutoDealer> =
   {
@@ -327,4 +327,4 @@ const autoBusinessJsonLd: WithContext<AutoRepair | AutoBodyShop | AutoDealer> =
     ],
   };
 
-export { autoBusinessJsonLd };
+export { autoBusinessJsonLd, createVehicleSchema };

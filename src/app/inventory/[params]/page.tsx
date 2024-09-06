@@ -9,6 +9,10 @@ import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
 // import Image from "next/image";
 import CarCarousel from "~/app/_components/car-carousel";
 import type { Metadata, ResolvingMetadata } from "next";
+import { createVehicleSchema } from "~/lib/constants";
+
+//TODO: Fix up color it says /n
+const BASE_URL = process.env.BASE_URL;
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -16,33 +20,73 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"], // You can adjust these weights as needed
 });
 
-//TODO: METADATA
 type Props = {
   params: { id: string };
   searchParams: Record<string, string | string[] | undefined>;
 };
 
-//TODO: METADATA
+const removeCommas = (str: string): string => {
+  return str.replace(/,/g, "");
+};
+
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  // read route params
-  const id = params.id;
+  const decodedParams = params.params;
+  const paramsArray = decodedParams.split("-");
+  const vin = paramsArray[paramsArray.length - 1];
 
-  // fetch data
-  // const product = await fetch(`https://.../${id}`).then((res) => res.json());
+  if (!vin) {
+    return {};
+  }
 
-  // optionally access and extend (rather than replace) parent metadata
+  const vehicle = await db.query.vehicles.findFirst({
+    where: (veh, { eq }) => eq(veh.vin, vin),
+    with: {
+      make: true,
+      color: true,
+    },
+  });
+
+  if (!vehicle) {
+    return {};
+  }
+
+  const vehicleSchemaProps: VehicleSchemaProps = {
+    vin: vehicle.vin,
+    mainImage: vehicle.mainImage ?? "",
+    autoWriterDescription: vehicle.autoWriterDescription ?? "",
+    vehicle: vehicle.vehicle ?? "",
+    makeId: vehicle.makeId,
+    model: vehicle.model ?? "",
+    year: vehicle.year ?? 0,
+    stockNumber: vehicle.stockNumber ?? "",
+    colorId: vehicle.colorId,
+    odometer: parseInt(removeCommas(vehicle.odometer), 10) ?? "",
+    price: vehicle.price ?? 0,
+    newOrUsed: vehicle.newOrUsed ?? "",
+    starredEquip: vehicle.starredEquip ?? "",
+  };
+
+  const vehicleSchema = createVehicleSchema(
+    vehicleSchemaProps,
+    vehicle.make?.name ?? "",
+    vehicle.color?.name ?? "",
+  );
+
   const previousImages = (await parent).openGraph?.images ?? [];
 
   return {
-    // title: product.title,
+    title: `${vehicle.year} ${vehicle.make?.name ?? ""} ${vehicle.model ?? ""}`,
+    // TODO: Fixup
+    description: vehicle.autoWriterDescription ?? "",
     openGraph: {
-      images: ["/some-specific-page-image.jpg", ...previousImages],
+      // TODO: Fixup
+      images: [vehicle.mainImage ?? "", ...previousImages],
     },
-    twitter: {
-      //TODO: example at this url https://www.davegray.codes/posts/nextjs-open-graph-social-media-cards
+    other: {
+      "application/ld+json": JSON.stringify(vehicleSchema),
     },
   };
 }
