@@ -28,6 +28,7 @@ interface VehicleData {
   VIN: string;
   ImageURLs: string;
   MainUrl: string;
+  MainImage: string;
   Body: string;
   Color: string;
   Vehicle: string;
@@ -208,6 +209,7 @@ const insertData = async () => {
           vin: row.VIN,
           imageUrls: row.ImageURLs,
           mainUrl: row.MainUrl,
+          mainImage: row.MainImage,
           bodyId: body ? body.id : null,
           colorId: color ? color.id : null,
           vehicle: row.Vehicle,
@@ -236,6 +238,7 @@ const insertData = async () => {
           set: {
             imageUrls: sql`excluded.image_urls`,
             mainUrl: sql`excluded.main_url`,
+            mainImage: row.MainImage,
             bodyId: sql`excluded.body_id`,
             colorId: sql`excluded.color_id`,
             vehicle: sql`excluded.vehicle`,

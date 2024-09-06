@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 
 import { Inter, Racing_Sans_One } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
-import { placeJsonLd, localBusinessJsonLd } from "~/lib/constants";
+import { autoBusinessJsonLd } from "~/lib/constants";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import {
@@ -55,12 +55,8 @@ export default function RootLayout({
       <body className={`font-sans ${inter.variable} antialiased`}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(placeJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessJsonLd),
+            __html: JSON.stringify(autoBusinessJsonLd),
           }}
         />
         <div className="flex h-screen flex-col justify-between">

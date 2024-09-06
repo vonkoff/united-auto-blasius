@@ -15,20 +15,23 @@ interface CarCarouselProps {
   item: string[];
 }
 
-const CarCarousel: React.FC<CarouselProps> = ({ item }) => {
-  // State variable for managing zoomed image
+const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
-  // Function to open zoomed image
   const openZoomedImage = (imageUrl: string) => {
     setZoomedImage(imageUrl);
   };
 
-  // Function to close zoomed image
   const closeZoomedImage = () => {
     setZoomedImage(null);
   };
-  console.log("HERE IMAGES", item);
+
+  console.log("Carousel Images:", item);
+
+  const getImageSrc = (url: string) => {
+    // If the URL doesn't include a directory separator, it's the main image
+    return url.includes("/") ? `/images/cars/${url}` : `/images/cars/${url}`;
+  };
 
   return (
     <>
@@ -45,7 +48,7 @@ const CarCarousel: React.FC<CarouselProps> = ({ item }) => {
                   className="relative h-full w-full"
                 >
                   <Image
-                    src={`/images/cars/${url}`}
+                    src={getImageSrc(url)}
                     alt={`Slide ${index + 1}`}
                     layout="fill"
                     objectFit="contain"
@@ -60,7 +63,6 @@ const CarCarousel: React.FC<CarouselProps> = ({ item }) => {
         </Carousel>
       </div>
 
-      {/* Render the zoomed image */}
       {zoomedImage && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
@@ -68,7 +70,7 @@ const CarCarousel: React.FC<CarouselProps> = ({ item }) => {
         >
           <div className="relative h-3/4 w-3/4">
             <Image
-              src={`/images/cars/${zoomedImage}`}
+              src={getImageSrc(zoomedImage)}
               alt="zoomed-image"
               layout="fill"
               objectFit="contain"
