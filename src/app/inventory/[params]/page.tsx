@@ -55,6 +55,7 @@ export async function generateMetadata(
 
   const vehicleSchemaProps: VehicleSchemaProps = {
     vin: vehicle.vin,
+    //TODO: Fix image which is in public folder
     mainImage: vehicle.mainImage ?? "",
     autoWriterDescription: vehicle.autoWriterDescription ?? "",
     vehicle: vehicle.vehicle ?? "",

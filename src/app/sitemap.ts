@@ -17,6 +17,8 @@ const getStaticPages = (): SitemapEntry[] => {
     },
     { url: `${BASE_URL}/terms-of-use`, lastModified: new Date().toISOString() },
     { url: `${BASE_URL}/inventory`, lastModified: new Date().toISOString() },
+    { url: `${BASE_URL}/emissions`, lastModified: new Date().toISOString() },
+    { url: `${BASE_URL}/service`, lastModified: new Date().toISOString() },
   ];
 };
 
@@ -25,11 +27,12 @@ const getInventoryEntries = async (): Promise<SitemapEntry[]> => {
     .select({
       vehicle: vehicles.vehicle,
       stockNumber: vehicles.stockNumber,
+      vin: vehicles.vin,
     })
     .from(vehicles);
 
   return vehicleData.map((item) => ({
-    url: `${BASE_URL}/inventory/${encodeURIComponent(item.vehicle)}-${item.stockNumber}`,
+    url: `${BASE_URL}/inventory/${encodeURIComponent(item.vehicle ?? "")}-${item.vin ?? ""}`,
     lastModified: new Date().toISOString(), // Update this if you have a lastModified field in your schema
   }));
 };
