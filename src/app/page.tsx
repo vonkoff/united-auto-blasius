@@ -108,14 +108,14 @@ export default async function Home() {
               <Clock10 className="h-4 w-4 md:h-6 md:w-6 lg:h-6 lg:w-6" />{" "}
               <div className="flex flex-col">
                 <p>
-                  Open Monday-Saturday!{" "}
+                  Open Monday-Friday!{" "}
                   <u>
                     <strong>Sales</strong>
                   </u>
                   : 8am-5pm
                 </p>
                 <p>
-                  Open Monday-Saturday!{" "}
+                  Open Monday-Friday!{" "}
                   <u>
                     <strong>Service</strong>
                   </u>
