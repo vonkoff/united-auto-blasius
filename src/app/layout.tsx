@@ -65,7 +65,7 @@ export default function RootLayout({
             <div className="flex items-center justify-evenly ">
               <div>OPEN MONDAY-FRIDAY! SALES & SERVICE: 8AM-5PM</div>
               <div>
-                SALES:{" "}
+                SALES & Service:{" "}
                 <a className="font-bold underline" href="tel:203-437-8805">
                   203-756-8851
                 </a>
