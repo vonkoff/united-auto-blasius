@@ -1,5 +1,5 @@
-import { db } from "~/db";
 import { inventory } from "~/db/schema";
+import { db } from "~/db";
 import { like } from "drizzle-orm";
 
 const BASE_URL = process.env.BASE_URL;
