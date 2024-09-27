@@ -34,7 +34,9 @@ const EmissionsInfo = () => {
                 Full-Service Test Centers can perform emissions testing on all
                 eligible vehicles regardless of fuel type or model year.
               </li>
-              <li className="text-sm sm:text-base">Cost is $20</li>
+              <li className="text-sm sm:text-base">
+                Cost is $20 <strong>CASH ONLY</strong>
+              </li>
             </ul>
             <div className="mt-6 flex justify-center">
               <Button asChild>

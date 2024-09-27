@@ -2,7 +2,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
-import { MapPin, Clock10 } from "lucide-react";
+import { MapPin, Clock10, Car } from "lucide-react";
 import { Racing_Sans_One } from "next/font/google";
 import mapPic from "../../public/images/map.png";
 import frontUnitedAuto from "../../public/images/front-building-3.jpg";
@@ -106,8 +106,27 @@ export default async function Home() {
             <span className="my-2 flex items-center gap-2 text-sm font-light lg:text-base">
               <Clock10 className="h-4 w-4 md:h-6 md:w-6 lg:h-6 lg:w-6" />{" "}
               <div className="flex flex-col">
-                <p>Open Today! Sales: 9am-5pm</p>
-                <p>Open Today! Service: 9am-5pm</p>
+                <p>
+                  Open Today!{" "}
+                  <u>
+                    <strong>Sales</strong>
+                  </u>
+                  : 9am-5pm
+                </p>
+                <p>
+                  Open Today!{" "}
+                  <u>
+                    <strong>Service</strong>
+                  </u>
+                  : 9am-5pm
+                </p>
+                <p>
+                  Saturday Only!{" "}
+                  <u>
+                    <strong>Emissions</strong>
+                  </u>
+                  : 9am-12pm
+                </p>
               </div>
             </span>
           </div>
