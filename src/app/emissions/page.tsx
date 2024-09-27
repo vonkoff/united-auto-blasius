@@ -35,7 +35,10 @@ const EmissionsInfo = () => {
                 eligible vehicles regardless of fuel type or model year.
               </li>
               <li className="text-sm sm:text-base">
-                Cost is $20 <strong>CASH ONLY</strong>
+                Cost is $20{" "}
+                <u>
+                  <strong>CASH ONLY</strong>
+                </u>
               </li>
             </ul>
             <div className="mt-6 flex justify-center">
