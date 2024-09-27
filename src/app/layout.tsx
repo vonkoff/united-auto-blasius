@@ -63,7 +63,7 @@ export default function RootLayout({
         <div className="flex h-screen flex-col justify-between">
           <div className="hidden justify-center bg-neutral-800 pt-0.5 text-xs text-white sm:py-1 md:block lg:text-sm">
             <div className="flex items-center justify-evenly ">
-              <div>OPEN TODAY! SALES & SERVICE: 8AM-5PM</div>
+              <div>OPEN MONDAY-SATURDAY! SALES & SERVICE: 8AM-5PM</div>
               <div>
                 SALES:{" "}
                 <a className="font-bold underline" href="tel:203-437-8805">
