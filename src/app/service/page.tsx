@@ -62,7 +62,7 @@ const ServiceCenter = () => {
             </ul>
             <div className="mt-6 flex justify-center">
               <Button asChild>
-                <a href="tel:860-618-7351">Schedule Service Now</a>
+                <a href="tel:203-756-8851">Call 203-756-8851</a>
               </Button>
             </div>
           </div>

@@ -8,6 +8,10 @@ const racingSansOne = Racing_Sans_One({
   weight: ["400"],
 });
 
+const address = "219 Congress Ave, Waterbury, Connecticut";
+const encodedAddress = encodeURIComponent(address);
+const mapUrl = `https://maps.google.com?q=${encodedAddress}`;
+
 const AboutPage = () => {
   return (
     <div className="relative">
@@ -60,10 +64,12 @@ const AboutPage = () => {
             </p>
             <div className="mt-6 flex justify-center space-x-4">
               <Button asChild>
-                <a href="tel:2037568851">Call Us</a>
+                <a href="tel:203-756-8851">Call Us 203-756-8851</a>
               </Button>
               <Button asChild variant="outline">
-                <a href="#location">Visit Us</a>
+                <a href={mapUrl} target="_blank" rel="noopener noreferrer">
+                  Get Directions
+                </a>
               </Button>
             </div>
           </div>

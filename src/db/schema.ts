@@ -4,6 +4,11 @@ import {
   text,
   integer,
   primaryKey,
+  bigint,
+  doublePrecision,
+  timestamp,
+  date,
+  boolean,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -104,6 +109,50 @@ export const vehicleEquipments = pgTable(
     };
   },
 );
+
+export const inventory = pgTable("inventory", {
+  DealerId: text("DealerId"),
+  DealerName: text("Dealer Name"),
+  VIN: text("VIN"),
+  Stock: text("Stock #"),
+  NewUsed: text("New/Used"),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  Year: bigint("Year", { mode: "number" }),
+  Make: text("Make"),
+  Model: text("Model"),
+  ModelNumber: text("Model Number"),
+  Body: text("Body"),
+  Transmission: text("Transmission"),
+  Series: text("Series"),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  BodyDoorCt: bigint("Body Door Ct", { mode: "number" }),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  Odometer: bigint("Odometer", { mode: "number" }),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  EngineCylinderCt: bigint("Engine Cylinder Ct", { mode: "number" }),
+  EngineDisplacement: doublePrecision("Engine Displacement"),
+  DrivetrainDesc: text("Drivetrain Desc"),
+  Colour: text("Colour"),
+  InteriorColor: text("Interior Color"),
+  MSRP: doublePrecision("MSRP"),
+  Price: doublePrecision("Price"),
+  InventoryDate: date("Inventory Date"),
+  Certified: boolean("Certified"),
+  Description: text("Description"),
+  Features: text("Features"),
+  PhotoUrlList: text("Photo Url List"),
+  CityMPG: text("City MPG"),
+  HighwayMPG: text("Highway MPG"),
+  PhotosLastModifiedDate: timestamp("Photos Last Modified Date", {
+    mode: "string",
+  }),
+  SeriesDetail: text("Series Detail"),
+  Engine: text("Engine"),
+  Fuel: text("Fuel"),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  Age: bigint("Age", { mode: "number" }),
+  Disposition: text("Disposition"),
+});
 
 // Relations
 export const vehiclesRelations = relations(vehicles, ({ one, many }) => ({

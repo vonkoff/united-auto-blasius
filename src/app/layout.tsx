@@ -1,9 +1,7 @@
 import "~/styles/globals.css";
-
 import { Inter, Racing_Sans_One } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { autoBusinessJsonLd } from "~/lib/constants";
-
 import { TRPCReactProvider } from "~/trpc/react";
 import {
   Sheet,
@@ -24,7 +22,6 @@ import {
   MenubarTrigger,
 } from "~/components/ui/menubar";
 import { Facebook, Phone } from "lucide-react";
-
 import Image from "next/image";
 
 const inter = Inter({
@@ -33,9 +30,13 @@ const inter = Inter({
 });
 
 const racingSansOne = Racing_Sans_One({
-  subsets: ["latin"], // specify the subsets you want to use
-  weight: ["400"], // specify the weights you want to use
+  subsets: ["latin"],
+  weight: ["400"],
 });
+
+const address = "219 CONGRESS AVE, WATERBURY, CT 06708";
+const encodedAddress = encodeURIComponent(address);
+const mapUrl = `https://maps.google.com?q=${encodedAddress}`;
 
 export const metadata = {
   title: "United Auto",
@@ -64,19 +65,23 @@ export default function RootLayout({
             <div className="flex items-center justify-evenly ">
               <div>OPEN TODAY! SALES: 8:30AM-5PM</div>
               <div>
-                SALES:{"  "}
+                SALES:{" "}
                 <a className="font-bold underline" href="tel:203-437-8805">
                   203-756-8851
                 </a>
               </div>
               <div>
-                219 CONGRESS AVE, WATERBURY, CT 06708{"  "}
-                <span className="font-bold underline">Get Directions</span>
+                {address}{" "}
+                <a
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold underline"
+                >
+                  Get Directions
+                </a>
               </div>
             </div>
-            {/* <div className="flex items-center justify-evenly  md:hidden"> */}
-            {/*   Welcome to United Auto */}
-            {/* </div> */}
           </div>
           <header className="flex items-center justify-between bg-background px-4 py-3 shadow-sm md:px-6 md:py-4">
             <Link href="/" className="flex items-center gap-2" prefetch={false}>

@@ -28,11 +28,6 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
 
   console.log("Carousel Images:", item);
 
-  const getImageSrc = (url: string) => {
-    // If the URL doesn't include a directory separator, it's the main image
-    return url.includes("/") ? `/images/cars/${url}` : `/images/cars/${url}`;
-  };
-
   return (
     <>
       <div className="mb-6 flex max-w-full items-center justify-center">
@@ -48,7 +43,8 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
                   className="relative h-full w-full"
                 >
                   <Image
-                    src={getImageSrc(url)}
+                    src={url}
+                    // src={getImageSrc(url)}
                     alt={`Slide ${index + 1}`}
                     layout="fill"
                     objectFit="contain"
@@ -70,7 +66,7 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
         >
           <div className="relative h-3/4 w-3/4">
             <Image
-              src={getImageSrc(zoomedImage)}
+              src={zoomedImage}
               alt="zoomed-image"
               layout="fill"
               objectFit="contain"

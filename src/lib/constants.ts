@@ -9,26 +9,24 @@ import type {
 
 const BASE_URL = process.env.BASE_URL;
 
-interface VehicleSchemaProps {
+export interface VehicleSchemaProps {
   vin: string;
+  make: string;
+  colour: string;
   mainImage: string;
   autoWriterDescription: string;
   vehicle: string;
-  makeId: number;
   model: string;
   year: number;
   stockNumber: string;
-  colorId: number;
-  odometer: string;
+  color: string;
+  odometer: number;
   price: number;
-  newOrUsed: string;
-  starredEquip: string;
+  newOrUsed: "U" | "N";
 }
 
 const createVehicleSchema = (
   props: VehicleSchemaProps,
-  makeName: string,
-  colorName: string,
 ): WithContext<Product & Car> => {
   const currentDate = new Date();
   const priceValidUntil = new Date(
@@ -50,20 +48,20 @@ const createVehicleSchema = (
     sku: props.stockNumber,
     brand: {
       "@type": "Brand",
-      name: makeName,
+      name: props.make,
     },
     model: props.model,
     vehicleModelDate: props.year.toString(),
     itemCondition:
-      props.newOrUsed === "new"
+      props.newOrUsed === "N"
         ? "https://schema.org/NewCondition"
         : "https://schema.org/UsedCondition",
     vehicleIdentificationNumber: props.vin,
     mpn: props.stockNumber,
-    color: colorName,
+    color: props.colour,
     manufacturer: {
       "@type": "Organization",
-      name: makeName,
+      name: props.make,
     },
     mileageFromOdometer: {
       "@type": "QuantitativeValue",
@@ -77,7 +75,7 @@ const createVehicleSchema = (
       price: props.price.toString(),
       priceValidUntil: priceValidUntil,
       itemCondition:
-        props.newOrUsed === "new"
+        props.newOrUsed === "N"
           ? "https://schema.org/NewCondition"
           : "https://schema.org/UsedCondition",
       availability: "https://schema.org/InStock",
@@ -107,8 +105,8 @@ const autoBusinessJsonLd: WithContext<AutoRepair | AutoBodyShop | AutoDealer> =
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "40.7127281",
-      longitude: "-74.0060152",
+      latitude: "41.5583",
+      longitude: "-73.0365",
     },
     openingHoursSpecification: [
       {

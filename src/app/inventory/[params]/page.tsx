@@ -1,18 +1,14 @@
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style */
 import { Fragment } from "react";
 import { Montserrat } from "next/font/google";
 import { db } from "~/db/index";
-import { promises as fs } from "fs";
-import path from "path";
+import { eq, like, and } from "drizzle-orm";
+import { inventory } from "~/db/schema";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
 // import Image from "next/image";
 import CarCarousel from "~/app/_components/car-carousel";
 import type { Metadata, ResolvingMetadata } from "next";
 import { createVehicleSchema } from "~/lib/constants";
-
-//TODO: Fix up color it says /n
-const BASE_URL = process.env.BASE_URL;
+import { type VehicleSchemaProps } from "~/lib/constants";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,12 +21,8 @@ type Props = {
   searchParams: Record<string, string | string[] | undefined>;
 };
 
-const removeCommas = (str: string): string => {
-  return str.replace(/,/g, "");
-};
-
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params }: { params: { params: string } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const decodedParams = params.params;
@@ -41,50 +33,44 @@ export async function generateMetadata(
     return {};
   }
 
-  const vehicle = await db.query.vehicles.findFirst({
-    where: (veh, { eq }) => eq(veh.vin, vin),
-    with: {
-      make: true,
-      color: true,
-    },
+  const vehicle = await db.query.inventory.findFirst({
+    where: (veh, { eq }) => eq(veh.VIN, vin),
   });
 
   if (!vehicle) {
     return {};
   }
 
+  if (!vehicle.PhotoUrlList) return {};
+
+  let newOrUsed: "U" | "N" = "U";
+  if (vehicle.NewUsed === "N") newOrUsed = "N";
+
   const vehicleSchemaProps: VehicleSchemaProps = {
-    vin: vehicle.vin,
-    //TODO: Fix image which is in public folder
-    mainImage: vehicle.mainImage ?? "",
-    autoWriterDescription: vehicle.autoWriterDescription ?? "",
-    vehicle: vehicle.vehicle ?? "",
-    makeId: vehicle.makeId,
-    model: vehicle.model ?? "",
-    year: vehicle.year ?? 0,
-    stockNumber: vehicle.stockNumber ?? "",
-    colorId: vehicle.colorId,
-    odometer: parseInt(removeCommas(vehicle.odometer), 10) ?? "",
-    price: vehicle.price ?? 0,
-    newOrUsed: vehicle.newOrUsed ?? "",
-    starredEquip: vehicle.starredEquip ?? "",
+    vin: vehicle.VIN ?? "",
+    make: vehicle.Make ?? "",
+    colour: vehicle.Colour ?? "",
+    mainImage: vehicle.PhotoUrlList.split("|")[0] ?? "",
+    autoWriterDescription: vehicle.Description ?? "",
+    vehicle: `${vehicle.Year}-${vehicle.Make}-${vehicle.Model}-${vehicle.Series}`,
+    model: vehicle.Model ?? "",
+    year: vehicle.Year ?? 0,
+    stockNumber: vehicle.Stock ?? "",
+    color: vehicle.Colour ?? "",
+    odometer: vehicle.Odometer ?? 0,
+    price: vehicle.Price ?? 0,
+    newOrUsed: newOrUsed,
   };
 
-  const vehicleSchema = createVehicleSchema(
-    vehicleSchemaProps,
-    vehicle.make?.name ?? "",
-    vehicle.color?.name ?? "",
-  );
+  const vehicleSchema = createVehicleSchema(vehicleSchemaProps);
 
   const previousImages = (await parent).openGraph?.images ?? [];
 
   return {
-    title: `${vehicle.year} ${vehicle.make?.name ?? ""} ${vehicle.model ?? ""}`,
-    // TODO: Fixup
-    description: vehicle.autoWriterDescription ?? "",
+    title: `${vehicle.Year} ${vehicle.Make ?? ""} ${vehicle.Model ?? ""}`,
+    description: vehicle.Description ?? "",
     openGraph: {
-      // TODO: Fixup
-      images: [vehicle.mainImage ?? "", ...previousImages],
+      images: [vehicle.PhotoUrlList.split("|")[0] ?? "", ...previousImages],
     },
     other: {
       "application/ld+json": JSON.stringify(vehicleSchema),
@@ -92,14 +78,10 @@ export async function generateMetadata(
   };
 }
 
-interface InventoryPageProps {
-  params: {
-    params: string;
-  };
-}
-
 export async function generateStaticParams() {
-  const result = await db.query.vehicles.findMany();
+  const result = await db.query.inventory.findMany({
+    where: like(inventory.Stock, "G%"),
+  });
 
   if (!Array.isArray(result)) {
     console.error("Database query did not return an array.");
@@ -107,7 +89,7 @@ export async function generateStaticParams() {
   }
 
   const paths = result.map((vehicle) => {
-    const vehicleName = `${vehicle.vehicle.replace(/ /g, "-")}-${vehicle.vin}`;
+    const vehicleName = `${vehicle.Year}-${vehicle.Make}-${vehicle.Model}-${vehicle.Body}-${vehicle.VIN}`;
     console.log("VEHICLE NAME: ", vehicleName);
     return {
       params: encodeURIComponent(vehicleName),
@@ -133,79 +115,36 @@ const InventoryItemPage = async ({
       return <div>Invalid VIN</div>;
     }
 
-    const vehicle = await db.query.vehicles.findFirst({
-      where: (veh, { eq }) => eq(veh.vin, vin),
-      with: {
-        body: true,
-        color: true,
-        class: true,
-        drivetrainType: true,
-        exteriorBaseColor: true,
-        interior: true,
-        interiorMaterial: true,
-        make: true,
-        transmission: true,
-        vehicleEquipments: {
-          with: {
-            equipment: true,
-          },
-        },
-      },
+    const vehicle = await db.query.inventory.findFirst({
+      where: and(eq(inventory.VIN, vin), like(inventory.Stock, "G%")),
     });
 
     if (!vehicle) {
       return <div>Item not found</div>;
     }
 
-    if (!vehicle.price) {
+    if (!vehicle.Price) {
       return <div>Item not found</div>;
     }
 
-    if (!vehicle.price) {
-      return <div>Item not found</div>;
-    }
-
-    if (!vehicle.mainImage) {
+    if (!vehicle.PhotoUrlList) {
       return <div>Item not found</div>;
     }
 
     // New image processing logic
-    let imageUrls: string[] = [];
-    const imageFolder = path.join(
-      process.cwd(),
-      "public",
-      "images",
-      "cars",
-      vehicle.mainImage,
-    );
-
-    // Add the main image URL first
-    if (vehicle.mainUrl) {
-      imageUrls.push(vehicle.mainUrl);
-    }
-
-    try {
-      const files = await fs.readdir(imageFolder);
-      const additionalImages = files
-        .filter((file) => /\.(jpg|jpeg|png|gif)$/i.test(file))
-        .map((file) => `${vehicle.mainImage}/${file}`); // Include the relative path for additional images
-
-      imageUrls = [...imageUrls, ...additionalImages];
-    } catch (error) {
-      console.error("Error reading image directory:", error);
-    }
+    const imageUrls = vehicle.PhotoUrlList.split("|");
 
     const vehiclePrice = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-    }).format(vehicle.price);
+    }).format(vehicle.Price);
 
     const infoItems = [
-      { label: "Exterior", value: vehicle.exteriorBaseColor?.name },
-      { label: "Transmission", value: vehicle.transmission?.name },
-      { label: "Mileage", value: vehicle.odometer },
-      { label: "Make", value: vehicle.make?.name },
-      { label: "Model", value: vehicle.model },
+      { label: "Exterior", value: vehicle.Colour },
+      { label: "Transmission", value: vehicle.Transmission },
+      { label: "Mileage", value: vehicle.Odometer?.toLocaleString() },
+      { label: "Make", value: vehicle.Make },
+      { label: "Model", value: vehicle.Model },
       {
         label: "Price",
         value: vehiclePrice,
@@ -228,18 +167,18 @@ const InventoryItemPage = async ({
           <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
             <div className="mb-4 md:mb-0">
               <h1 className={`text-3xl font-bold ${montserrat.className}`}>
-                <span className="font-normal">Pre-Owned</span> {vehicle.year}{" "}
-                {vehicle.make?.name} {vehicle.model}
+                <span className="font-normal">Pre-Owned</span> {vehicle.Year}{" "}
+                {vehicle.Make} {vehicle.Model}
               </h1>
               <div className="mt-0.5 text-sm">
                 <span className={`mr-4 ${montserrat.className}`}>
-                  <span className="font-semibold">VIN:</span> {vehicle.vin}
+                  <span className="font-semibold">VIN:</span> {vehicle.VIN}
                 </span>
                 <span>
                   <span className={`font-semibold ${montserrat.className}`}>
                     Stock:
                   </span>{" "}
-                  {vehicle.stockNumber}
+                  {vehicle.Stock}
                 </span>
               </div>
             </div>
@@ -319,9 +258,8 @@ const InventoryItemPage = async ({
                   <div
                     className={`bg-[#F2F2F2] p-4 text-sm ${montserrat.className}`}
                   >
-                    {vehicle.autoWriterDescription
-                      .split("STOP BY")
-                      .map((part, index) => (
+                    {vehicle.Description?.split("STOP BY").map(
+                      (part, index) => (
                         <Fragment key={index}>
                           {index > 0 && (
                             <>
@@ -332,7 +270,8 @@ const InventoryItemPage = async ({
                           {index > 0 ? "STOP BY" : ""}
                           {part}
                         </Fragment>
-                      ))}
+                      ),
+                    )}
                   </div>
                 </CardContent>
               </Card>

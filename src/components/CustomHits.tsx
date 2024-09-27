@@ -11,12 +11,12 @@ function CustomHits(props: UseHitsProps) {
       {items.map((hit) => (
         <CarCard
           key={hit["Stock #"]}
-          carJpg={hit.MainUrl}
-          altText={`${hit.Vehicle}`}
-          carTitle={`${hit.Vehicle}`}
+          carJpg={hit.R2_Photo_Url_List}
+          altText={`${hit.Year} ${hit.Make}-${hit.Model}-${hit.Body}`}
+          carTitle={`${hit.Year} ${hit.Make} ${hit.Model} ${hit.Body}`}
           carPrice={hit.Price}
           // eslint-disable-next-line
-          link={`/inventory/${encodeURIComponent(`${hit.Vehicle.replace(/ /g, "-")}-${hit.VIN}`)}`}
+          link={`/inventory/${encodeURIComponent(`${hit.Make}-${hit.Model}-${hit.Body}-${hit.VIN}`)}`}
         />
       ))}
     </div>

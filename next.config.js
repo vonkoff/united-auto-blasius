@@ -14,7 +14,13 @@ const config = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["images.pexels.com", "archives.rep-am.com"],
+    domains: [
+      "images.pexels.com",
+      "archives.rep-am.com",
+      "vehicle-photos-published.vauto.com",
+      "unitedauto.r2.cloudflarestorage.com",
+      "unitedautoimages.ivukusic.workers.dev",
+    ],
   },
 };
 

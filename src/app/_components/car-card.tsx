@@ -18,12 +18,25 @@ export function CarCard({
 }: CarCardProps) {
   const formatter = new Intl.NumberFormat("en-US");
   const formattedPrice = formatter.format(carPrice);
+  const WORKER_URL = "https://unitedautoimages.ivukusic.workers.dev";
+  const R2_URL_PREFIX = "https://unitedauto.r2.cloudflarestorage.com/";
+
+  const getFirstImageUrl = (urlList: string): string => {
+    const firstUrl = urlList.split("|")[0];
+    const objectKey = firstUrl!.replace(R2_URL_PREFIX, "");
+    const encodedObjectKey = encodeURIComponent(objectKey);
+    return `${WORKER_URL}/${encodedObjectKey}.jpg`;
+  };
+
+  const firstImageUrl = getFirstImageUrl(carJpg);
+  console.log("LINKS: ", link);
 
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow-lg transition-all hover:shadow-xl dark:bg-gray-950">
       <Link href={link} className="block" prefetch={false}>
         <Image
-          src={`/images/cars/${carJpg}`}
+          // src={`/images/cars/${carJpg}`}
+          src={firstImageUrl}
           width={400}
           height={300}
           alt={altText}

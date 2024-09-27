@@ -13,6 +13,10 @@ const racingSansOne = Racing_Sans_One({
   weight: ["400"], // specify the weights you want to use
 });
 
+const address = "219 Congress Ave, Waterbury, CT 06708";
+const encodedAddress = encodeURIComponent(address);
+const mapUrl = `https://maps.google.com?q=${encodedAddress}`;
+
 export default async function Home() {
   noStore();
   // const hello = await api.post.hello.query({ text: "from tRPC" });
@@ -64,12 +68,22 @@ export default async function Home() {
             Welcome to United Auto!
           </h1>
           <p className="max-w-prose text-sm sm:text-base">
-            Welcome to United Auto! Located at 219 Congress Ave, Waterbury, CT
-            06708, United Auto is your first choice for quality pre-owned cars,
-            trucks, and SUVs. Our mission is to provide you with the perfect
-            vehicle at a great price and with the exceptional customer service
-            our name is known for. Simply put, we are committed to ensuring that
-            your auto buying experience is the best it can possibly be.
+            For over 70 years, United Auto Sales & Service has been a trusted
+            name in Waterbury, Connecticut. We offer a wide variety of
+            automotive services and repairs, all carried out by highly trained
+            and certified technicians using quality parts and equipment. Our
+            mission is to provide you with the best automotive repair experience
+            possible, from excellent workmanship to fair pricing and superior
+            customer service.
+          </p>
+          <p className="max-w-prose text-sm sm:text-base">
+            At United Auto, we understand that trust is earned. Whether you need
+            maintenance, repair services, or are in the market for a pre-owned
+            car, truck, or SUV, we are here to meet all your automotive needs
+            under one roof. Our dedication to customer satisfaction sets us
+            apart in the industry. Located at 219 Congress Ave, Waterbury, CT
+            06708, we look forward to serving you and becoming your go-to
+            automotive partner for years to come. Let us earn your trust today!
           </p>
         </div>
       </div>
@@ -80,10 +94,15 @@ export default async function Home() {
             <h2 className="mb-1 mt-4 text-xl uppercase md:mx-auto lg:text-2xl">
               Get Directions
             </h2>
-            <span className="my-2 flex items-center gap-2 text-sm font-light lg:text-base">
+            <a
+              href={mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="my-2 flex items-center gap-2 text-sm font-light transition-colors hover:text-blue-300 lg:text-base"
+            >
               <MapPin className="h-4 w-4 md:h-6 md:w-6 lg:h-6 lg:w-6" />
-              219 Congress Ave, Waterbury, CT 06708
-            </span>
+              {address}
+            </a>
             <span className="my-2 flex items-center gap-2 text-sm font-light lg:text-base">
               <Clock10 className="h-4 w-4 md:h-6 md:w-6 lg:h-6 lg:w-6" />{" "}
               <div className="flex flex-col">
@@ -92,12 +111,19 @@ export default async function Home() {
               </div>
             </span>
           </div>
-          <Image
-            className="object-fit order-first  max-h-64 w-full md:order-last"
-            alt="map location of United Auto"
-            src={mapPic}
-            priority={true}
-          />
+          <a
+            href={mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="order-first w-full md:order-last"
+          >
+            <Image
+              className="object-fit max-h-64 w-full cursor-pointer"
+              alt="map location of United Auto"
+              src={mapPic}
+              priority={true}
+            />
+          </a>
         </div>
       </div>
     </main>

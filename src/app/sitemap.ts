@@ -1,5 +1,6 @@
 import { db } from "~/db";
-import { vehicles } from "~/db/schema";
+import { inventory } from "~/db/schema";
+import { like } from "drizzle-orm";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -23,16 +24,19 @@ const getStaticPages = (): SitemapEntry[] => {
 };
 
 const getInventoryEntries = async (): Promise<SitemapEntry[]> => {
-  const vehicleData = await db
-    .select({
-      vehicle: vehicles.vehicle,
-      stockNumber: vehicles.stockNumber,
-      vin: vehicles.vin,
-    })
-    .from(vehicles);
+  const inventoryData = await db.query.inventory.findMany({
+    where: like(inventory.Stock, "G%"),
+    columns: {
+      Year: true,
+      Make: true,
+      Model: true,
+      Body: true,
+      VIN: true,
+    },
+  });
 
-  return vehicleData.map((item) => ({
-    url: `${BASE_URL}/inventory/${encodeURIComponent(item.vehicle ?? "")}-${item.vin ?? ""}`,
+  return inventoryData.map((item) => ({
+    url: `${BASE_URL}/inventory/${encodeURIComponent(`${item.Year}-${item.Make}-${item.Model}-${item.Body}-${item.VIN}`)}`,
     lastModified: new Date().toISOString(), // Update this if you have a lastModified field in your schema
   }));
 };
