@@ -25,8 +25,8 @@ export function Search() {
           windowTitle(routeState) {
             const indexState = routeState.indexName ?? {};
             return indexState.query
-              ? `MyWebsite - Results for: ${indexState.query}`
-              : "MyWebsite - Results page";
+              ? `United Auto - Results for: ${indexState.query}`
+              : "United Auto - Results page";
           },
         },
         stateMapping: {

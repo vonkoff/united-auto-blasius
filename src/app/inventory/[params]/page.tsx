@@ -272,6 +272,14 @@ const InventoryItemPage = async ({
                         </Fragment>
                       ),
                     )}
+                    <br />
+                    <br />
+                    <p>
+                      Price excludes tax, title, registration, and dealer
+                      conveyance fee. Dealer conveyance fee is $600.00. Dealer
+                      not responsible for typographical errors. See dealer for
+                      details.
+                    </p>
                   </div>
                 </CardContent>
               </Card>
