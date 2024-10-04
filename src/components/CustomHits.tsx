@@ -11,7 +11,8 @@ function CustomHits(props: UseHitsProps) {
       {items.map((hit) => (
         <CarCard
           key={hit["Stock #"]}
-          carJpg={hit.R2_Photo_Url_List}
+          // carJpg={hit.R2_Photo_Url_List}
+          carJpg={hit["Photo Url List"]}
           altText={`${hit.Year} ${hit.Make}-${hit.Model}-${hit.Body}`}
           carTitle={`${hit.Year} ${hit.Make} ${hit.Model} ${hit.Body}`}
           carPrice={hit.Price}

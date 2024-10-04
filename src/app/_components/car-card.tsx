@@ -18,14 +18,15 @@ export function CarCard({
 }: CarCardProps) {
   const formatter = new Intl.NumberFormat("en-US");
   const formattedPrice = formatter.format(carPrice);
-  const WORKER_URL = "https://unitedautoimages.ivukusic.workers.dev";
-  const R2_URL_PREFIX = "https://unitedauto.r2.cloudflarestorage.com/";
+  // const WORKER_URL = "https://unitedautoimages.ivukusic.workers.dev";
+  // const R2_URL_PREFIX = "https://unitedauto.r2.cloudflarestorage.com/";
 
   const getFirstImageUrl = (urlList: string): string => {
     const firstUrl = urlList.split("|")[0];
-    const objectKey = firstUrl!.replace(R2_URL_PREFIX, "");
-    const encodedObjectKey = encodeURIComponent(objectKey);
-    return `${WORKER_URL}/${encodedObjectKey}.jpg`;
+    return firstUrl!;
+    // const objectKey = firstUrl!.replace(R2_URL_PREFIX, "");
+    // const encodedObjectKey = encodeURIComponent(objectKey);
+    // return `${WORKER_URL}/${encodedObjectKey}.jpg`;
   };
 
   const firstImageUrl = getFirstImageUrl(carJpg);
