@@ -40,7 +40,8 @@ type VehicleData = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const vehicle = await getVehicleData(params.params);
 
-  if (!vehicle || !vehicle.PhotoUrlList) {
+  //TODO: Make is so Photo Url List is required. Image coming soon should be put if not images found
+  if (!vehicle) {
     return {};
   }
 
@@ -122,7 +123,11 @@ export const revalidate = 3600; // Revalidate every hour
 export default async function InventoryItemPage({ params }: Props) {
   const vehicle = await getVehicleData(params.params);
 
-  if (!vehicle?.Price || !vehicle?.PhotoUrlList) {
+  //TODO: Change it so Price is needed and not optional
+  // if (!vehicle || !vehicle?.Price || !vehicle?.PhotoUrlList) {
+  //   notFound();
+  // }
+  if (!vehicle) {
     notFound();
   }
 
