@@ -43,7 +43,7 @@ const createVehicleSchema = (
 
   const vehicleUrl = `${BASE_URL}/inventory/${encodeURIComponent(`${props.vehicle.replace(/ /g, "-")}-${props.vin}`)}`;
 
-  const descriptionText = `💵 Price: $${props.price.toLocaleString()} - ${props.autoWriterDescription}`;
+  const descriptionText = `$${props.price.toLocaleString()} - ${props.autoWriterDescription}`;
   const truncatedDescription =
     descriptionText.length > 160
       ? descriptionText.slice(0, 157) + "..."

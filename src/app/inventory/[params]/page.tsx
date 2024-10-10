@@ -75,7 +75,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${vehicle.Year} ${vehicle.Make ?? ""} ${vehicle.Model ?? ""}`,
-    description: vehicle.Description ?? "",
+    description:
+      `$${vehicle.Price.toLocaleString()} - ${vehicle.Description}` ?? "",
     openGraph: {
       images: [vehicle.PhotoUrlList.split("|")[0] ?? ""],
     },
