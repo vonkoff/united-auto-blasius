@@ -23,6 +23,12 @@ export interface VehicleSchemaProps {
   odometer: number;
   price: number;
   newOrUsed: "U" | "N";
+  //TODO: ADD
+  // numberOfDoors: number;
+  // fuelEfficiency: {
+  //   city: number;
+  //   highway: number;
+  // };
 }
 
 const createVehicleSchema = (
@@ -37,6 +43,12 @@ const createVehicleSchema = (
 
   const vehicleUrl = `${BASE_URL}/inventory/${encodeURIComponent(`${props.vehicle.replace(/ /g, "-")}-${props.vin}`)}`;
 
+  const descriptionText = `💵 Price: $${props.price.toLocaleString()} - ${props.autoWriterDescription}`;
+  const truncatedDescription =
+    descriptionText.length > 160
+      ? descriptionText.slice(0, 157) + "..."
+      : descriptionText;
+
   return {
     "@context": "https://schema.org",
     //@ts-ignore
@@ -44,7 +56,7 @@ const createVehicleSchema = (
     "@id": props.vin,
     name: props.vehicle,
     image: vehicleUrl + props.mainImage,
-    description: props.autoWriterDescription,
+    description: truncatedDescription,
     sku: props.stockNumber,
     brand: {
       "@type": "Brand",
@@ -68,6 +80,20 @@ const createVehicleSchema = (
       value: props.odometer,
       unitCode: "SMI",
     },
+    // TODO: ADD
+    // numberOfDoors: props.numberOfDoors,
+    // fuelEfficiency: {
+    //   "@type": "QuantitativeValue",
+    //   value: props.fuelEfficiency.city,
+    //   unitCode: "MPG",
+    //   name: "city",
+    // },
+    // additionalProperty: {
+    //   "@type": "PropertyValue",
+    //   name: "fuelEfficiencyHighway",
+    //   value: props.fuelEfficiency.highway,
+    //   unitCode: "MPG",
+    // },
     offers: {
       "@type": "Offer",
       url: vehicleUrl,

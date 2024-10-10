@@ -44,11 +44,11 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
                 >
                   <Image
                     src={url}
-                    // src={getImageSrc(url)}
                     alt={`Slide ${index + 1}`}
                     layout="fill"
                     objectFit="contain"
                     className="rounded-xl"
+                    priority={index === 0} // Set priority only for the first image
                   />
                 </div>
               </CarouselItem>
