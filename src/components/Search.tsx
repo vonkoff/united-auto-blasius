@@ -26,7 +26,7 @@ export function Search() {
             const indexState = routeState.indexName ?? {};
             return indexState.query
               ? `United Auto - Results for: ${indexState.query}`
-              : "United Auto - Results page";
+              : "United Auto - Car Sales Inventory";
           },
         },
         stateMapping: {

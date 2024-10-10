@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const vehicleSchema = createVehicleSchema(vehicleSchemaProps);
 
   return {
-    title: `${vehicle.Year} ${vehicle.Make ?? ""} ${vehicle.Model ?? ""}`,
+    title: `Pre-Owned ${vehicle.Year} ${vehicle.Make ?? ""} ${vehicle.Model ?? ""} - $${vehicle.Price.toLocaleString()}`,
     description:
       `$${vehicle.Price.toLocaleString()} - ${vehicle.Description}` ?? "",
     openGraph: {

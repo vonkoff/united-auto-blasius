@@ -6,6 +6,8 @@ import { MapPin, Clock10, Car } from "lucide-react";
 import { Racing_Sans_One } from "next/font/google";
 import mapPic from "../../public/images/map.png";
 import frontUnitedAuto from "../../public/images/front-building-3.jpg";
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
 //TODO: match all else images like the one above
 
 const racingSansOne = Racing_Sans_One({
@@ -20,7 +22,16 @@ const mapUrl = `https://maps.google.com?q=${encodedAddress}`;
 export default async function Home() {
   noStore();
   // const hello = await api.post.hello.query({ text: "from tRPC" });
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("~/components/map"), {
+        loading: () => <p>Loading map...</p>,
+        ssr: false,
+      }),
+    [],
+  );
 
+  const position: [number, number] = [41.54369, -73.04909];
   return (
     <main className="relative  sm:items-center sm:justify-center">
       <div className="relative">
@@ -131,22 +142,28 @@ export default async function Home() {
               </div>
             </span>
           </div>
-          <a
-            href={mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
             className="order-first w-full md:order-last"
+            style={{ height: "500px" }}
           >
-            <div className="relative h-0 w-full pb-[75%]">
-              <Image
-                className="absolute inset-0 h-full w-full object-cover"
-                alt="map location of United Auto"
-                src={mapPic}
-                priority={true}
-                layout="fill"
-              />
-            </div>
-          </a>
+            <Map pos={position} />
+          </div>
+          {/* <a */}
+          {/*   href={mapUrl} */}
+          {/*   target="_blank" */}
+          {/*   rel="noopener noreferrer" */}
+          {/*   className="order-first w-full md:order-last" */}
+          {/* > */}
+          {/*   <div className="relative h-0 w-full pb-[75%]"> */}
+          {/*     <Image */}
+          {/*       className="absolute inset-0 h-full w-full object-cover" */}
+          {/*       alt="map location of United Auto" */}
+          {/*       src={mapPic} */}
+          {/*       priority={true} */}
+          {/*       layout="fill" */}
+          {/*     /> */}
+          {/*   </div> */}
+          {/* </a> */}
         </div>
       </div>
     </main>

@@ -39,7 +39,7 @@ const encodedAddress = encodeURIComponent(address);
 const mapUrl = `https://maps.google.com?q=${encodedAddress}`;
 
 export const metadata = {
-  title: "United Auto",
+  title: "United Auto - Trust for over 70 years in Waterbury, Connecticut",
   description:
     "At United Auto Sales & Service in Waterbury, CT, we offer quality automotive services and repairs by highly trained technicians. Visit us for excellent service",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
