@@ -122,7 +122,7 @@ export const revalidate = 3600; // Revalidate every hour
 export default async function InventoryItemPage({ params }: Props) {
   const vehicle = await getVehicleData(params.params);
 
-  if (!vehicle || !vehicle.Price || !vehicle.PhotoUrlList) {
+  if (!vehicle?.Price || !vehicle?.PhotoUrlList) {
     notFound();
   }
 
