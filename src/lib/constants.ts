@@ -149,6 +149,7 @@ const autoBusinessJsonLd: WithContext<AutoRepair | AutoBodyShop | AutoDealer> =
       },
     ],
     priceRange: "$-$$",
+    //TODO: Make this auomatic updates from api
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",

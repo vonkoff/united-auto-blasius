@@ -201,7 +201,7 @@ export default function RootLayout({
               className="mb-6 mr-4 rounded-full border-2 border-black bg-green-500 fill-white text-green-500 sm:hidden"
             />
           </Link>
-          <footer className="flex items-center justify-evenly gap-2 pb-5 text-xs md:text-base">
+          <footer className="mt-4 flex items-center justify-evenly gap-2 pb-5 text-xs md:text-base">
             <Link
               aria-label="Go to facebook page"
               href="https://www.facebook.com/UnitedAutoWaterbury/"
