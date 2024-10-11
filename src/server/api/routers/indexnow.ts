@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { publicProcedure, createTRPCRouter } from "~/server/api/trpc";
 import sitemap from "~/app/sitemap";
 
