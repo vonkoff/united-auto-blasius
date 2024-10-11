@@ -1,3 +1,5 @@
+// TODO: Create global-error.js.
+// TODO: Should add loading files
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
