@@ -1,5 +1,3 @@
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style */
 import { publicProcedure, createTRPCRouter } from "~/server/api/trpc";
 import sitemap from "~/app/sitemap";
 
@@ -37,7 +35,8 @@ export const indexNowRouter = createTRPCRouter({
           submittedUrls: urlsToIndex,
         };
       } else {
-        throw new Error(`Error triggering IndexNow: ${response.statusText}`);
+        const statusText = await response.text();
+        throw new Error(`Error triggering IndexNow: ${statusText}`);
       }
     } catch (error) {
       console.error("Error triggering IndexNow:", error);
