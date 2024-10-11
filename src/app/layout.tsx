@@ -42,7 +42,7 @@ export const metadata = {
   title: "United Auto - Trust for over 70 years in Waterbury, Connecticut",
   description:
     "At United Auto Sales & Service in Waterbury, CT, we offer quality automotive services and repairs by highly trained technicians. Visit us for excellent service",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  // icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({
