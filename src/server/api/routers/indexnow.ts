@@ -4,7 +4,7 @@ import sitemap from "~/app/sitemap";
 export const indexNowRouter = createTRPCRouter({
   triggerIndexNow: publicProcedure.mutation(async ({ ctx }) => {
     const INDEXNOW_API_URL = "https://api.indexnow.org/indexnow";
-    const HOST = "https://unitedautowaterbury.com";
+    const HOST = "unitedautowaterbury.com";
     const KEY = "f26a6a3e4e1241259874f67a3f1c63fb";
     const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 
