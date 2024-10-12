@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Montserrat } from "next/font/google";
 import { db } from "~/db/index";
 import { eq, like, and } from "drizzle-orm";
@@ -171,9 +170,10 @@ export default async function InventoryItemPage({ params }: Props) {
           </div>
         </div>
       </header>
-      <div className="container mx-auto px-6 pb-6">
+
+      <div className="container mx-auto pb-6 pl-6">
         <div className="flex flex-col lg:flex-row">
-          <div className="w-full pr-0 lg:w-2/3 lg:pr-6">
+          <div className="w-full pr-0 lg:w-2/3 lg:basis-3/4 lg:pr-6">
             <CarCarousel item={imageUrls} />
             <h2
               className={`mb-2 mt-6 text-xl font-semibold ${montserrat.className}`}
@@ -226,7 +226,8 @@ export default async function InventoryItemPage({ params }: Props) {
               </CardContent>
             </Card>
           </div>
-          <div className="mt-6 hidden w-full lg:mt-0 lg:block lg:w-1/3">
+
+          <div className="mt-6 hidden w-full lg:mt-0 lg:block lg:w-1/3 lg:basis-1/4">
             <Card className="w-full">
               <CardHeader>
                 <CardTitle className={`${montserrat.className}`}>
