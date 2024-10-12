@@ -1,5 +1,5 @@
 //@ts-nocheck
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style */
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style, @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/prefer-optional-chain */
 "use client";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
