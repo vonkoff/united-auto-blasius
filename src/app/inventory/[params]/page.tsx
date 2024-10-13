@@ -149,6 +149,7 @@ export default async function InventoryItemPage({ params }: Props) {
 
   return (
     <>
+      {/* //TODO: Put this under when on md screen size below photos */}
       <header className="mb-6 bg-[#333333] p-4 text-white">
         <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
           <div className="mb-4 md:mb-0">
