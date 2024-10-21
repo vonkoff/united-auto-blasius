@@ -45,7 +45,7 @@ export function Search() {
         },
       }}
     >
-      <Configure hitsPerPage={10} />
+      <Configure hitsPerPage={20} />
       <section className="w-full bg-gray-100 py-12 dark:bg-gray-800">
         <div className="container">
           <div className="flex flex-col items-center">
@@ -53,10 +53,10 @@ export function Search() {
               <h2 className="text-3xl font-bold tracking-tight">
                 Our Car Collection
               </h2>
-              <p className="max-w-[700px] text-gray-500 dark:text-gray-400">
+              <h1 className="max-w-[700px] text-gray-500 dark:text-gray-400">
                 Browse through our diverse selection of the latest car models,
                 each offering exceptional performance, style, and comfort.
-              </p>
+              </h1>
             </div>
             <SearchBox
               autoFocus
