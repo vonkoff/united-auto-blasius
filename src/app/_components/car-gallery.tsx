@@ -56,6 +56,8 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
   const images: ReactImageGalleryItem[] = imageUrls.map((url) => ({
     original: url,
     thumbnail: url, // Using the same image for thumbnail
+    thumbnailAlt: "car",
+    loading: "lazy",
     originalHeight: 600, // Adjust as needed
     originalWidth: 1000, // Adjust as needed
   }));
@@ -69,6 +71,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
           src={item.original}
           alt="car picture"
           fill={true}
+          loading="lazy"
           // alt={item.description}
           style={{ height: "100%", width: "100%", objectFit: "contain" }}
         />
