@@ -8,6 +8,8 @@ import type { Metadata } from "next";
 import { createVehicleSchema } from "~/lib/constants";
 import { type VehicleSchemaProps } from "~/lib/constants";
 import { notFound } from "next/navigation";
+import CarGallery from "~/app/_components/car-gallery";
+import ImageGalleryComponent from "~/app/_components/car-gallery";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -16,7 +18,7 @@ const montserrat = Montserrat({
 });
 
 type Props = {
-  params: { params: string };
+  params: Promise<{ params: string }>;
 };
 
 // Define a type for the vehicle data
@@ -37,9 +39,9 @@ type VehicleData = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const vehicle = await getVehicleData(params.params);
+  const resolvedParams = await params;
+  const vehicle = await getVehicleData(resolvedParams.params);
 
-  //TODO: Make is so Photo Url List is required. Image coming soon should be put if not images found
   if (!vehicle) {
     return {};
   }
@@ -61,13 +63,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     odometer: vehicle.Odometer ?? 0,
     price: vehicle.Price ?? 0,
     newOrUsed: newOrUsed,
-
-    //TODO: ADD
-    // numberOfDoors: number;
-    // fuelEfficiency: {
-    //   city: number;
-    //   highway: number;
-    // };
   };
 
   const vehicleSchema = createVehicleSchema(vehicleSchemaProps);
@@ -121,13 +116,11 @@ export async function generateStaticParams() {
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function InventoryItemPage({ params }: Props) {
-  const vehicle = await getVehicleData(params.params);
+  const resolvedParams = await params;
+  const vehicle = await getVehicleData(resolvedParams.params);
 
-  //TODO: Change it so Price is needed and not optional
-  // if (!vehicle || !vehicle?.Price || !vehicle?.PhotoUrlList) {
-  //   notFound();
-  // }
   if (!vehicle) {
+    //TODO: Figure out why notFound() not working and not getting vehcile is not null
     notFound();
   }
 
@@ -149,7 +142,6 @@ export default async function InventoryItemPage({ params }: Props) {
 
   return (
     <>
-      {/* //TODO: Put this under when on md screen size below photos */}
       <header className="mb-6 bg-[#333333] p-4 text-white">
         <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
           <div className="mb-4 md:mb-0">
@@ -175,7 +167,11 @@ export default async function InventoryItemPage({ params }: Props) {
       <div className="container mx-auto pb-6 pl-6">
         <div className="flex flex-col lg:flex-row">
           <div className="w-full pr-0 lg:w-2/3 lg:basis-3/4 lg:pr-6">
-            <CarCarousel item={imageUrls} />
+            <ImageGalleryComponent imageUrls={imageUrls} />
+
+            {/* <CarGallery item={imageUrls} /> */}
+
+            {/* <CarCarousel item={imageUrls} /> */}
             <h2
               className={`mb-2 mt-6 text-xl font-semibold ${montserrat.className}`}
             >

@@ -192,8 +192,9 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
         <div
           key={index}
           className={cn(
-            "h-28 w-1/3 flex-shrink-0 cursor-pointer border lg:h-[7.5rem] lg:w-full",
-            index === currentIndex ? "border-blue-500" : "border-transparent",
+            // "h-28 w-1/3 flex-shrink-0 cursor-pointer lg:h-[7.5rem] lg:w-full",
+            "h-28 w-1/3 flex-shrink-0 cursor-pointer border", // Mobile sizing
+            "lg:h-[7.5rem] lg:w-full", // Desktop sizing
           )}
           onClick={() => {
             if (isDragging.current) return;
@@ -205,7 +206,8 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
               src={url}
               alt={`Thumbnail ${index + 1}`}
               layout="fill"
-              objectFit="cover"
+              objectFit="contain" // Use cover for mobile
+              // className="object-cover" // Use contain only for desktop
               draggable="false"
             />
           </div>
@@ -217,7 +219,7 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
   return (
     <div className="flex flex-col lg:flex-row">
       <div
-        className="relative flex max-w-full items-center justify-center lg:w-3/4"
+        className="relative flex max-w-full items-start justify-center lg:w-3/4"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -231,7 +233,8 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
               <CarouselItem key={index}>
                 <div
                   onClick={() => openZoomedImage(url)}
-                  className="relative w-full pb-[75%]"
+                  className="relative pb-[75%]" // 4:3 aspect ratio
+                  // className="relative w-full pb-[75%]"
                 >
                   <Image
                     src={url}

@@ -214,7 +214,7 @@ export default function RootLayout({
             </Link>
             <div>
               {/* //TODO: Update this below to be sitemap page and just put down every link */}
-              <Link href="/sitemap">Sitemap</Link>
+              <Link href="/sitemaps">Sitemaps</Link>
               {" | "}
               <Link href="/privacy-policy">Privacy Policy</Link>
               {" | "}

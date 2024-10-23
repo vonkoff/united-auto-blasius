@@ -1,7 +1,9 @@
+// components/map/index.tsx
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
+import { useEffect } from "react";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
@@ -16,13 +18,20 @@ const defaultSettings = {
   zoom: 14,
 };
 
-const Map = ({ pos, zoom = defaultSettings.zoom }: MapProps) => {
-  const latitude = Array.isArray(pos) ? pos[0] : pos.lat;
-  const longitude = Array.isArray(pos) ? pos[1] : pos.lng;
-  const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+export default function Map({ pos, zoom = defaultSettings.zoom }: MapProps) {
+  // Clean up function to handle map container
+  useEffect(() => {
+    return () => {
+      const mapContainer = document.querySelector(".leaflet-container");
+      if (mapContainer) {
+        (mapContainer as any)._leaflet_id = null;
+      }
+    };
+  }, []);
 
   return (
     <MapContainer
+      key={Array.isArray(pos) ? `${pos[0]}-${pos[1]}` : `${pos.lat}-${pos.lng}`}
       center={pos}
       zoom={zoom}
       scrollWheelZoom={true}
@@ -30,26 +39,21 @@ const Map = ({ pos, zoom = defaultSettings.zoom }: MapProps) => {
     >
       <TileLayer
         attribution="&copy; OpenStreetMap contributors &copy; CARTO"
-        // url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
-      {/* <Marker position={pos}> */}
-      {/*   <Popup> */}
-      {/*     United Auto Sales & Service */}
-      {/*     <br /> */}
-      {/*     219 Congress Ave, Waterbury, CT 06708 */}
-      {/*   </Popup> */}
-      {/* </Marker> */}
       <Marker
         position={pos}
         eventHandlers={{
           click: () => {
-            window.open(mapUrl, "_blank");
+            const lat = Array.isArray(pos) ? pos[0] : pos.lat;
+            const lng = Array.isArray(pos) ? pos[1] : pos.lng;
+            window.open(
+              `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
+              "_blank",
+            );
           },
         }}
       />
     </MapContainer>
   );
-};
-
-export default Map;
+}
