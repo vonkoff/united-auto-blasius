@@ -21,6 +21,11 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
   // State to track fullscreen mode
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Ensure all URLs start with https instead of http
+  const secureImageUrls = imageUrls.map((url) =>
+    url.startsWith("http://") ? url.replace("http://", "https://") : url,
+  );
+
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== "undefined") {
@@ -52,8 +57,8 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
     setIsFullscreen(isFullScreen);
   };
 
-  // Map the image URLs to the format expected by react-image-gallery
-  const images: ReactImageGalleryItem[] = imageUrls.map((url) => ({
+  // Map the secure image URLs to the format expected by react-image-gallery
+  const images: ReactImageGalleryItem[] = secureImageUrls.map((url) => ({
     original: url,
     thumbnail: url, // Using the same image for thumbnail
     thumbnailAlt: "car",
@@ -72,7 +77,6 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
           alt="car picture"
           fill={true}
           loading="lazy"
-          // alt={item.description}
           style={{ height: "100%", width: "100%", objectFit: "contain" }}
         />
       </div>
