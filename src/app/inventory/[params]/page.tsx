@@ -10,6 +10,7 @@ import { type VehicleSchemaProps } from "~/lib/constants";
 import { notFound } from "next/navigation";
 import CarGallery from "~/app/_components/car-gallery";
 import ImageGalleryComponent from "~/app/_components/car-gallery";
+import "~/app/_components/vehicle-header.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -113,6 +114,37 @@ export async function generateStaticParams() {
   }));
 }
 
+function VehicleHeader({ vehicle }) {
+  return (
+    <header className="mb-5 bg-[#333333] text-white">
+      <div className="mx-auto max-w-screen-md px-4 md:mx-0 md:max-w-full md:px-0">
+        {/* Header Content */}
+        <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
+          <div className="mx-14 my-4">
+            <h1
+              className={`text-xl font-bold md:text-3xl ${montserrat.className}`}
+            >
+              <span className="font-normal">Pre-Owned</span> {vehicle.Year}{" "}
+              {vehicle.Make} {vehicle.Model}
+            </h1>
+            <div className="mt-0.5 text-sm">
+              <span className={`mr-4 ${montserrat.className}`}>
+                <span className="font-semibold">VIN:</span> {vehicle.VIN}
+              </span>
+              <span>
+                <span className={`font-semibold ${montserrat.className}`}>
+                  Stock:
+                </span>{" "}
+                {vehicle.Stock}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function InventoryItemPage({ params }: Props) {
@@ -142,36 +174,27 @@ export default async function InventoryItemPage({ params }: Props) {
 
   return (
     <>
-      <header className="mb-6 bg-[#333333] p-4 text-white">
-        <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
-          <div className="mb-4 md:mb-0">
-            <h1 className={`text-3xl font-bold ${montserrat.className}`}>
-              <span className="font-normal">Pre-Owned</span> {vehicle.Year}{" "}
-              {vehicle.Make} {vehicle.Model}
-            </h1>
-            <div className="mt-0.5 text-sm">
-              <span className={`mr-4 ${montserrat.className}`}>
-                <span className="font-semibold">VIN:</span> {vehicle.VIN}
-              </span>
-              <span>
-                <span className={`font-semibold ${montserrat.className}`}>
-                  Stock:
-                </span>{" "}
-                {vehicle.Stock}
-              </span>
-            </div>
-          </div>
+      <div className="flex flex-col">
+        {/* Header */}
+        <div className="order-2 md:order-1">
+          <VehicleHeader vehicle={vehicle} />
         </div>
-      </header>
+        {/* Carousel */}
+        <div className="order-1 block md:order-2 md:hidden">
+          <ImageGalleryComponent
+            imageUrls={imageUrls}
+            // className="block md:hidden"
+          />
+        </div>
+      </div>
 
-      <div className="container mx-auto pb-6 pl-6">
+      <div className="container mx-auto pb-6">
         <div className="flex flex-col lg:flex-row">
           <div className="w-full pr-0 lg:w-2/3 lg:basis-3/4 lg:pr-6">
-            <ImageGalleryComponent imageUrls={imageUrls} />
+            <div className="hidden md:block">
+              <ImageGalleryComponent imageUrls={imageUrls} />
+            </div>
 
-            {/* <CarGallery item={imageUrls} /> */}
-
-            {/* <CarCarousel item={imageUrls} /> */}
             <h2
               className={`mb-2 mt-6 text-xl font-semibold ${montserrat.className}`}
             >

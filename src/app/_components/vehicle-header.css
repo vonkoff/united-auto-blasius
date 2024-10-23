@@ -1,0 +1,17 @@
+.mobileHeader {
+  display: block;
+}
+
+.desktopHeader {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobileHeader {
+    display: none;
+  }
+
+  .desktopHeader {
+    display: block;
+  }
+}
