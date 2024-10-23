@@ -1,4 +1,6 @@
 // components/map/index.tsx
+/* eslint-disable @typescript-eslint/no-explicit-any  @typescript-eslint/no-unsafe-member-access */
+
 "use client";
 
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
