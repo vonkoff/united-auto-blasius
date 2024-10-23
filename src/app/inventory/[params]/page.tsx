@@ -114,7 +114,7 @@ export async function generateStaticParams() {
   }));
 }
 
-function VehicleHeader(vehicle: VehicleData) {
+function VehicleHeader({ vehicle }: VehicleData) {
   return (
     <header className="mb-5 bg-[#333333] text-white">
       <div className="mx-auto max-w-screen-md px-4 md:mx-0 md:max-w-full md:px-0">
