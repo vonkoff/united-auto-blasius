@@ -1,5 +1,5 @@
 //@ts-nocheck
-/* eslint-disable @typescript-eslint/no-explicit-any  @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-explicit-any,  @typescript-eslint/no-unsafe-member-access */
 
 "use client";
 
