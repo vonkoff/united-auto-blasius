@@ -58,11 +58,11 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
   };
 
   // Map the secure image URLs to the format expected by react-image-gallery
-  const images: ReactImageGalleryItem[] = secureImageUrls.map((url) => ({
+  const images: ReactImageGalleryItem[] = secureImageUrls.map((url, index) => ({
     original: url,
     thumbnail: url, // Using the same image for thumbnail
     thumbnailAlt: "car",
-    loading: "lazy",
+    loading: index === 0 ? "eager" : "lazy", // Load the first image eagerly, others lazily
     originalHeight: 600, // Adjust as needed
     originalWidth: 1000, // Adjust as needed
   }));
@@ -76,7 +76,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
           src={item.original}
           alt="car picture"
           fill={true}
-          loading="lazy"
+          loading={item.loading}
           style={{ height: "100%", width: "100%", objectFit: "contain" }}
         />
       </div>
