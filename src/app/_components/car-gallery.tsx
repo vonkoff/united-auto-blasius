@@ -4,6 +4,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import Image from "next/image";
 
 interface ImageGalleryComponentProps {
   imageUrls: string[];
@@ -64,9 +65,11 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
     // In normal mode, apply the fixed-height container
     return (
       <div style={{ height: "500px", overflow: "hidden" }}>
-        <img
+        <Image
           src={item.original}
-          alt={item.description}
+          alt="car picture"
+          fill={true}
+          // alt={item.description}
           style={{ height: "100%", width: "100%", objectFit: "contain" }}
         />
       </div>
