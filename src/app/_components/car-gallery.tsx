@@ -1,5 +1,4 @@
 "use client";
-// components/ImageGalleryComponent.js
 
 import React, { useState, useEffect, useRef } from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
@@ -16,12 +15,10 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
   const [thumbnailPosition, setThumbnailPosition] = useState<
     "bottom" | "right"
   >("right");
+  const [isMobile, setIsMobile] = useState(false);
   const galleryRef = useRef<ImageGallery>(null);
-
-  // State to track fullscreen mode
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Ensure all URLs start with https instead of http
   const secureImageUrls = imageUrls.map((url) =>
     url.startsWith("http://") ? url.replace("http://", "https://") : url,
   );
@@ -29,15 +26,12 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== "undefined") {
-        if (window.innerWidth <= 768) {
-          setThumbnailPosition("bottom");
-        } else {
-          setThumbnailPosition("right");
-        }
+        const mobile = window.innerWidth <= 768;
+        setIsMobile(mobile);
+        setThumbnailPosition(mobile ? "bottom" : "right");
       }
     };
 
-    // Set initial position
     handleResize();
 
     if (typeof window !== "undefined") {
@@ -52,42 +46,74 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
     }
   };
 
-  // Handler for fullscreen changes
   const handleScreenChange = (isFullScreen: boolean) => {
     setIsFullscreen(isFullScreen);
   };
 
-  // Map the secure image URLs to the format expected by react-image-gallery
   const images: ReactImageGalleryItem[] = secureImageUrls.map((url, index) => ({
     original: url,
-    thumbnail: url, // Using the same image for thumbnail
+    thumbnail: url,
     thumbnailAlt: "car",
-    loading: index === 0 ? "eager" : "lazy", // Load the first image eagerly, others lazily
-    originalHeight: 600, // Adjust as needed
-    originalWidth: 1000, // Adjust as needed
+    loading: index === 0 ? "eager" : "lazy",
+    originalHeight: 600,
+    originalWidth: 1000,
   }));
 
-  // Custom render function for normal mode
   const renderImage = (item: ReactImageGalleryItem) => {
-    // In normal mode, apply the fixed-height container
+    // Common props for Image component
+    const imageProps = {
+      src: item.original,
+      alt: "car picture",
+      fill: true,
+      loading: item.loading as "eager" | "lazy",
+      sizes: isFullscreen ? "100vw" : "(max-width: 768px) 100vw, 75vw",
+      priority: item.loading === "eager",
+    };
+
+    if (isFullscreen) {
+      return (
+        <div className="relative h-screen w-full">
+          <Image {...imageProps} className="object-contain" />
+        </div>
+      );
+    }
+
+    if (isMobile) {
+      return (
+        <div className="relative w-full pb-[66.67%]">
+          <Image {...imageProps} className="absolute inset-0 object-cover" />
+        </div>
+      );
+    }
+
     return (
-      <div style={{ height: "500px", overflow: "hidden" }}>
-        <Image
-          src={item.original}
-          alt="car picture"
-          fill={true}
-          loading={item.loading}
-          style={{ height: "100%", width: "100%", objectFit: "contain" }}
-        />
+      <div className="relative h-[500px]">
+        <Image {...imageProps} className="object-contain" />
       </div>
     );
   };
 
-  // Conditionally set renderItem
-  const renderItem = isFullscreen ? undefined : renderImage;
-
   return (
-    <div>
+    <div
+      className={`image-gallery-wrapper ${isMobile && !isFullscreen ? "mobile-view" : ""}`}
+    >
+      <style jsx global>{`
+        .mobile-view .image-gallery-slide {
+          height: auto !important;
+        }
+        .mobile-view .image-gallery-swipe {
+          height: auto !important;
+        }
+        .fullscreen .image-gallery-slide {
+          height: 100vh !important;
+        }
+        .image-gallery-content.fullscreen {
+          background: black;
+        }
+        .image-gallery-content.fullscreen .image-gallery-slide-wrapper {
+          height: 100vh;
+        }
+      `}</style>
       <ImageGallery
         ref={galleryRef}
         items={images}
@@ -95,8 +121,8 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
         showFullscreenButton={true}
         onClick={handleImageClick}
         thumbnailPosition={thumbnailPosition}
-        renderItem={renderItem} // Conditionally use custom render function
-        onScreenChange={handleScreenChange} // Handle fullscreen changes
+        renderItem={renderImage}
+        onScreenChange={handleScreenChange}
       />
     </div>
   );
