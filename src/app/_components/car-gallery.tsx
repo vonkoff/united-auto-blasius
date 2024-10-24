@@ -65,7 +65,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
       src: item.original,
       alt: "car picture",
       fill: true,
-      loading: item.loading as "eager" | "lazy",
+      loading: item.loading,
       sizes: isFullscreen ? "100vw" : "(max-width: 768px) 100vw, 75vw",
       priority: item.loading === "eager",
     };
