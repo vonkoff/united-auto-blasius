@@ -4,6 +4,9 @@ import { like } from "drizzle-orm";
 
 const BASE_URL = process.env.BASE_URL;
 
+// Revalidate every hour
+export const revalidate = 3600;
+
 interface SitemapEntry {
   url: string;
   lastModified: string;
@@ -37,7 +40,7 @@ const getInventoryEntries = async (): Promise<SitemapEntry[]> => {
 
   return inventoryData.map((item) => ({
     url: `${BASE_URL}/inventory/${encodeURIComponent(`${item.Year}-${item.Make}-${item.Model}-${item.Body}-${item.VIN}`)}`,
-    lastModified: new Date().toISOString(), // Update this if you have a lastModified field in your schema
+    lastModified: new Date().toISOString(),
   }));
 };
 
