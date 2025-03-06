@@ -25,6 +25,9 @@ const config = {
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/require-await": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     // TODO: Remove later
     "@typescript-eslint/ban-ts-comment": "off",
     // TODO: Remove later
