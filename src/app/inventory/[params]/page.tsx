@@ -176,7 +176,11 @@ export default async function InventoryItemPage({ params }: Props) {
     notFound();
   }
 
-  const imageUrls = vehicle.PhotoUrlList.split("|");
+  const PLACEHOLDER_IMAGE = "/images/no-image-placeholder.png";
+  // Handle missing or empty PhotoUrlList
+  const imageUrls = vehicle.PhotoUrlList?.trim()
+    ? vehicle.PhotoUrlList.split("|")
+    : [PLACEHOLDER_IMAGE];
 
   const vehiclePrice = new Intl.NumberFormat("en-US", {
     style: "currency",
