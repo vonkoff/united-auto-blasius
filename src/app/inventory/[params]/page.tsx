@@ -82,17 +82,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function getVehicleData(params: string): Promise<VehicleData | null> {
-  const decodedParams = params;
-  const paramsArray = decodedParams.split("-");
-  const vin = paramsArray[paramsArray.length - 1];
+  console.log("Raw params:", params); // Log the raw input
 
-  if (!vin) {
+  const decodedParams = decodeURIComponent(params); // Decode the string
+  console.log("Decoded params:", decodedParams);
+
+  const paramsArray = decodedParams.split("-");
+  console.log("Params array:", paramsArray);
+
+  const vin = paramsArray[paramsArray.length - 1];
+  console.log("Extracted VIN:", vin);
+
+  if (!vin || vin.length !== 17) {
+    // VINs are typically 17 characters
+    console.error(`Invalid VIN extracted: ${vin}`);
     return null;
   }
 
   const vehicle = await db.query.inventory.findFirst({
     where: and(eq(inventory.VIN, vin), like(inventory.Stock, "G%")),
   });
+
+  if (!vehicle) {
+    console.log(`No vehicle found for VIN: ${vin}`);
+  }
 
   return vehicle as VehicleData | null;
 }
@@ -153,10 +166,13 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default async function InventoryItemPage({ params }: Props) {
   const resolvedParams = await params;
+  console.log("Resolved params object:", resolvedParams);
+
   const vehicle = await getVehicleData(resolvedParams.params);
 
   if (!vehicle) {
     //TODO: Figure out why notFound() not working and not getting vehcile is not null
+    console.log(`Triggering notFound for params: ${resolvedParams.params}`);
     notFound();
   }
 
