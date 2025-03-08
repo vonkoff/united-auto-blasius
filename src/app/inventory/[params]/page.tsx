@@ -3,12 +3,10 @@ import { db } from "~/db/index";
 import { eq, like, and } from "drizzle-orm";
 import { inventory } from "~/db/schema";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
-import CarCarousel from "~/app/_components/car-carousel";
 import type { Metadata } from "next";
 import { createVehicleSchema } from "~/lib/constants";
 import { type VehicleSchemaProps } from "~/lib/constants";
 import { notFound } from "next/navigation";
-import CarGallery from "~/app/_components/car-gallery";
 import ImageGalleryComponent from "~/app/_components/car-gallery";
 import "~/app/_components/vehicle-header.css";
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
+// NOT USED ANYMORE BECAUSE HAVE TO PAY!
+// import Image from "next/image";
 import Script from "next/script";
 
 interface CarCardProps {
@@ -61,12 +62,23 @@ export function CarCard({
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow-lg transition-all hover:shadow-xl dark:bg-gray-950">
       <Link href={link} className="block" prefetch={false}>
-        <Image
+        {/* NOT PAYING FOR NEXTJS IMAGE ANYMORE! */}
+        {/* <Image */}
+        {/*   src={firstImageUrl} */}
+        {/*   width={400} */}
+        {/*   height={300} */}
+        {/*   alt={altText} */}
+        {/*   className="aspect-[4/3] w-full object-cover" */}
+        {/* /> */}
+        <img
           src={firstImageUrl}
-          width={400}
-          height={300}
           alt={altText}
+          width="400"
+          height="300"
+          loading="lazy" // Native lazy loading
+          decoding="async" // Asynchronous decoding for performance
           className="aspect-[4/3] w-full object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw" // Responsive sizes
         />
         <div className="space-y-2 p-4">
           <h3 className="text-lg font-semibold">{carTitle}</h3>
