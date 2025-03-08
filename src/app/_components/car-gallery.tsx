@@ -90,6 +90,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
       return (
         <div className="relative h-screen w-full">
           {/* <Image {...imageProps} className="object-contain" /> */}
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img
             {...imageProps}
             className="object-contain"
@@ -103,6 +104,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
       return (
         <div className="relative w-full pb-[66.67%]">
           {/* <Image {...imageProps} className="absolute inset-0 object-cover" /> */}
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img
             {...imageProps}
             className="absolute inset-0 object-cover"
@@ -116,6 +118,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
     return (
       <div className="relative h-[500px]">
         {/* <Image {...imageProps} className="object-contain" /> */}
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <img {...imageProps} className="object-contain" />
       </div>
     );
@@ -133,6 +136,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryComponentProps> = ({
           {/*   className="object-cover" */}
           {/*   sizes="100px" */}
           {/* /> */}
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img
             src={item.thumbnail}
             alt={item.thumbnailAlt ?? "thumbnail"}
