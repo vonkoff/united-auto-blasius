@@ -85,6 +85,13 @@ export default function RootLayout({
           </div>
           <header className="flex items-center justify-between bg-background px-4 py-3 shadow-sm md:px-6 md:py-4">
             <Link href="/" className="flex items-center gap-2" prefetch={false}>
+              {/* <img */}
+              {/*   className="w-full object-cover" */}
+              {/*       src="/images/united-auto-logo.jpg" */}
+              {/*       alt="United Auto Logo" */}
+              {/*   width="115" */}
+              {/*   height="115" */}
+              {/* /> */}
               <Image
                 src="/images/united-auto-logo.jpg"
                 priority={true}

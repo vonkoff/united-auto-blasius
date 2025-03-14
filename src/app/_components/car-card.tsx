@@ -1,7 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-// NOT USED ANYMORE BECAUSE HAVE TO PAY!
-// import Image from "next/image";
 import Script from "next/script";
 
 interface CarCardProps {

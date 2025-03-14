@@ -3,7 +3,6 @@
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
-import Image from "next/image";
 import { MapPin, Clock10, Car } from "lucide-react";
 import { Racing_Sans_One } from "next/font/google";
 import frontUnitedAuto from "../../public/images/front-building-3.jpg";
@@ -39,14 +38,19 @@ export default async function Home() {
         <div className="mx-auto">
           <div className="relative pt-48 shadow-xl">
             <div className="absolute inset-0">
-              <Image
+              <img
                 className="h-full w-full object-cover"
-                priority={true}
-                src={frontUnitedAuto}
+                src={frontUnitedAuto.src}
                 alt="Front of United Auto building"
-                width={500}
-                height={500}
               />
+              {/* <Image */}
+              {/*   className="h-full w-full object-cover" */}
+              {/*   priority={true} */}
+              {/*   src={frontUnitedAuto} */}
+              {/*   alt="Front of United Auto building" */}
+              {/*   width={500} */}
+              {/*   height={500} */}
+              {/* /> */}
               <div className="absolute inset-0 bg-[color:rgba(30,23,38,0.5)] mix-blend-multiply" />
               <div className="absolute bottom-0 left-1/2 mb-4 flex -translate-x-1/2 transform gap-4">
                 <Button

@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { Racing_Sans_One } from "next/font/google";
 import { Button } from "~/components/ui/button";
 import { type Metadata } from "next";
@@ -77,14 +76,21 @@ const EmissionsInfo = () => {
       />
       <div className="relative">
         <div className="h-64 overflow-hidden sm:h-80 md:h-96">
-          <Image
+          <img
             className="w-full object-cover object-center"
             src="https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt="Emissions Testing Center"
-            width={1260}
-            height={750}
-            priority
+            alt="United Auto Logo"
+            width="1260"
+            height="750"
           />
+          {/* <Image */}
+          {/*   className="w-full object-cover object-center" */}
+          {/*   src="https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" */}
+          {/*   alt="Emissions Testing Center" */}
+          {/*   width={1260} */}
+          {/*   height={750} */}
+          {/*   priority */}
+          {/* /> */}
         </div>
         <div className="container mx-auto p-6">
           <div className="relative -mt-16 flex justify-center">

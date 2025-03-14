@@ -4,8 +4,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-// NOT BEING USED ANYMORE BECAUSE HAVE TO PAY!
-// import Image from "next/image";
 
 interface ImageGalleryComponentProps {
   imageUrls: string[];

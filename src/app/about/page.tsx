@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { Racing_Sans_One } from "next/font/google";
 import { Button } from "~/components/ui/button";
 
@@ -16,15 +15,23 @@ const AboutPage = () => {
   return (
     <div className="relative">
       <div className="h-64 overflow-hidden sm:h-80 md:h-96">
-        <Image
+        <img
           className="w-full object-cover"
-          src="https://archives.rep-am.com/wp-content/uploads/sites/2/2016/05/20160511-183628-pic-523380661.jpg"
+          src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/475985874_1431879738209967_8489022505602632927_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=qw58xofPrbUQ7kNvgFFUkxl&_nc_oc=AdgUxfJ--vHKUWYMr0thmF7UoyfWFHwucaLX48YKBkGIw6PzrJoCd1XWK7adS_FBETYc8oWeWvQEzSZbfAY2F9u4&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=pWcuCZP-rJfvOX7-P7X9gQ&oh=00_AYHeevs3WD7DSolYYh5m96sUP_bwjntBRX6B4-n2cS9idg&oe=67DA53EE"
           alt="United Auto Sales & Service"
-          width={1260}
-          height={750}
-          priority
-          style={{ objectPosition: "center bottom" }}
+          width="1260"
+          height="750"
+          // style={{ objectPosition: "center bottom" }}
         />
+        {/* <Image */}
+        {/*   className="w-full object-cover" */}
+        {/*   src='https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/475985874_1431879738209967_8489022505602632927_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=qw58xofPrbUQ7kNvgFFUkxl&_nc_oc=AdgUxfJ--vHKUWYMr0thmF7UoyfWFHwucaLX48YKBkGIw6PzrJoCd1XWK7adS_FBETYc8oWeWvQEzSZbfAY2F9u4&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=pWcuCZP-rJfvOX7-P7X9gQ&oh=00_AYHeevs3WD7DSolYYh5m96sUP_bwjntBRX6B4-n2cS9idg&oe=67DA53EE' */}
+        {/*   alt="United Auto Sales & Service" */}
+        {/*   width={1260} */}
+        {/*   height={750} */}
+        {/*   priority */}
+        {/*   style={{ objectPosition: "center bottom" }} */}
+        {/* /> */}
       </div>
       <div className="container mx-auto p-6">
         <div className="relative -mt-16 flex justify-center">

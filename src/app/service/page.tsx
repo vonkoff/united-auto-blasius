@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { Racing_Sans_One } from "next/font/google";
 import { Button } from "~/components/ui/button";
 import { type Metadata } from "next";
@@ -263,14 +262,21 @@ const ServiceCenter = () => {
 
       <div className="relative">
         <div className="h-64 overflow-hidden sm:h-80 md:h-96">
-          <Image
-            className="w-full object-cover "
+          <img
+            className="w-full object-cover"
             src="https://images.pexels.com/photos/3807811/pexels-photo-3807811.jpeg?auto=compress&cs=tinysrgb&w=800"
             alt="Blasius United Auto Service Center"
-            width={1260}
-            height={750}
-            priority
+            width="1260"
+            height="750"
           />
+          {/* <Image */}
+          {/*   className="w-full object-cover " */}
+          {/*   src="https://images.pexels.com/photos/3807811/pexels-photo-3807811.jpeg?auto=compress&cs=tinysrgb&w=800" */}
+          {/*   alt="Blasius United Auto Service Center" */}
+          {/*   width={1260} */}
+          {/*   height={750} */}
+          {/*   priority */}
+          {/* /> */}
         </div>
         <div className="container mx-auto p-6">
           <div className="relative -mt-16 flex justify-center">

@@ -1,7 +1,6 @@
 // Carouselother.tsx
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 
 interface CarouselProps {
   images: string[];
@@ -30,12 +29,17 @@ const Carouselother: React.FC<CarouselProps> = ({ images }) => {
           className="relative h-60 w-full"
           onClick={() => openZoomedImage(url)}
         >
-          <Image
+          <img
             src={`/images/cars/${url}`}
             alt={`image ${index + 1}`}
-            layout="fill"
-            objectFit="cover"
+            className="absolute h-full w-full object-cover"
           />
+          {/* <Image */}
+          {/*   src={`/images/cars/${url}`} */}
+          {/*   alt={`image ${index + 1}`} */}
+          {/*   layout="fill" */}
+          {/*   objectFit="cover" */}
+          {/* /> */}
         </div>
       ))}
       {/* Render the zoomed image */}
@@ -45,12 +49,17 @@ const Carouselother: React.FC<CarouselProps> = ({ images }) => {
           onClick={closeZoomedImage}
         >
           <div className="relative h-3/4 w-3/4">
-            <Image
+            <img
               src={`/images/cars/${zoomedImage}`}
               alt="zoomed-image"
-              layout="fill"
-              objectFit="contain"
+              className="h-full w-full object-contain"
             />
+            {/* <Image */}
+            {/*   src={`/images/cars/${zoomedImage}`} */}
+            {/*   alt="zoomed-image" */}
+            {/*   layout="fill" */}
+            {/*   objectFit="contain" */}
+            {/* /> */}
           </div>
         </div>
       )}

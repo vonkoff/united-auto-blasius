@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/non-nullable-type-assertion-style, @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/prefer-optional-chain, @typescript-eslint/prefer-nullish-coalescing */
 "use client";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -202,14 +201,22 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
           }}
         >
           <div className="relative h-full w-full">
-            <Image
+            <img
               src={url}
               alt={`Thumbnail ${index + 1}`}
-              layout="fill"
-              objectFit="contain" // Use cover for mobile
-              // className="object-cover" // Use contain only for desktop
+              className="h-full w-full object-contain"
+              width="112" // Based on h-28 (7rem = 112px at default 16px/rem)
+              height="112"
               draggable="false"
             />
+            {/* <Image */}
+            {/*   src={url} */}
+            {/*   alt={`Thumbnail ${index + 1}`} */}
+            {/*   layout="fill" */}
+            {/*   objectFit="contain" // Use cover for mobile */}
+            {/*   // className="object-cover" // Use contain only for desktop */}
+            {/*   draggable="false" */}
+            {/* /> */}
           </div>
         </div>
       ))}
@@ -236,15 +243,23 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
                   className="relative pb-[75%]" // 4:3 aspect ratio
                   // className="relative w-full pb-[75%]"
                 >
-                  <Image
+                  <img
                     src={url}
                     alt={`Slide ${index + 1}`}
-                    layout="fill"
-                    objectFit="contain"
-                    priority={index === 0}
-                    quality={40}
-                    className="transition-opacity duration-300 ease-in-out"
+                    className="absolute h-full w-full object-contain transition-opacity duration-300 ease-in-out"
+                    width="1024" // Reasonable default for carousel main image; adjust as needed
+                    height="768" // Based on 4:3 aspect ratio (pb-[75%])
                   />
+
+                  {/* <Image */}
+                  {/*   src={url} */}
+                  {/*   alt={`Slide ${index + 1}`} */}
+                  {/*   layout="fill" */}
+                  {/*   objectFit="contain" */}
+                  {/*   priority={index === 0} */}
+                  {/*   quality={40} */}
+                  {/*   className="transition-opacity duration-300 ease-in-out" */}
+                  {/* /> */}
                 </div>
               </CarouselItem>
             ))}
@@ -271,12 +286,18 @@ const CarCarousel: React.FC<CarCarouselProps> = ({ item }) => {
           onClick={closeZoomedImage}
         >
           <div className="relative h-3/4 w-3/4">
-            <Image
-              src={zoomedImage}
-              alt="zoomed-image"
-              layout="fill"
-              objectFit="contain"
+            <img
+              src={url}
+              alt={`Thumbnail ${index + 1}`}
+              className="h-full w-full object-contain"
+              draggable="false"
             />
+            {/* <Image */}
+            {/*   src={zoomedImage} */}
+            {/*   alt="zoomed-image" */}
+            {/*   layout="fill" */}
+            {/*   objectFit="contain" */}
+            {/* /> */}
           </div>
         </div>
       )}

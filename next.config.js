@@ -15,6 +15,7 @@ const config = {
   },
   images: {
     domains: [
+      "scontent-lga3-2.xx.fbcdn.net",
       "images.pexels.com",
       "archives.rep-am.com",
       "vehicle-photos-published.vauto.com",
